@@ -14,6 +14,8 @@ public class MyGame : Game
 
 	public MyGame() : base(800, 600, false)
 	{
+		targetFps = 60;
+
 		levelManager = new LevelManager();
 		LateAddChild(levelManager);
 	}
