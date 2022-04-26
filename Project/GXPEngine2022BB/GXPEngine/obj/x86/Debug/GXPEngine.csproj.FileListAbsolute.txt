@@ -4,3 +4,11 @@ C:\Users\joris\OneDrive - Saxion\CMGT Term 4\Project 4 'final approach'\basic fr
 C:\Users\joris\OneDrive - Saxion\CMGT Term 4\Project 4 'final approach'\basic framework\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
 C:\Users\joris\OneDrive - Saxion\CMGT Term 4\Project 4 'final approach'\basic framework\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.exe
 C:\Users\joris\OneDrive - Saxion\CMGT Term 4\Project 4 'final approach'\basic framework\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.pdb
+H:\Saxion\CMGT\2021-2022\Trimester 4\1.4 Project Final Approach\project_final_approach\Project\GXPEngine2022BB\GXPEngine\bin\Debug\GXPEngine.exe.config
+H:\Saxion\CMGT\2021-2022\Trimester 4\1.4 Project Final Approach\project_final_approach\Project\GXPEngine2022BB\GXPEngine\bin\Debug\GXPEngine.exe
+H:\Saxion\CMGT\2021-2022\Trimester 4\1.4 Project Final Approach\project_final_approach\Project\GXPEngine2022BB\GXPEngine\bin\Debug\GXPEngine.pdb
+H:\Saxion\CMGT\2021-2022\Trimester 4\1.4 Project Final Approach\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.csproj.AssemblyReference.cache
+H:\Saxion\CMGT\2021-2022\Trimester 4\1.4 Project Final Approach\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.csproj.SuggestedBindingRedirects.cache
+H:\Saxion\CMGT\2021-2022\Trimester 4\1.4 Project Final Approach\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
+H:\Saxion\CMGT\2021-2022\Trimester 4\1.4 Project Final Approach\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.exe
+H:\Saxion\CMGT\2021-2022\Trimester 4\1.4 Project Final Approach\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.pdb
