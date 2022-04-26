@@ -3,7 +3,7 @@ using GXPEngine;
 
 public class MyGame : Game
 {
-	public static MyGame current; // to access mygame from another class this in the declarations: MyGame myGame = MyGame.current;
+	public static MyGame current; // to access mygame from another class put this in the declarations: MyGame myGame = MyGame.current;
 
 	LevelManager levelManager;
 
