@@ -5,9 +5,25 @@ namespace GXPEngine
 {
     public class LevelManager : GameObject
     {
-        public LevelManager()
+        MyGame myGame = MyGame.current;
+
+        Button mainMenuButton;
+        GameUI gameUI;
+
+        public LevelManager() : base()
         {
             LoadMainMenu();
+        }
+
+        void Update()
+        {
+            if (mainMenuButton != null)
+            {
+                if (mainMenuButton.CheckIfPressed() == true)
+                {
+                    LoadMainMenu();
+                }
+            }
         }
 
         public void LoadMainMenu()
@@ -21,7 +37,13 @@ namespace GXPEngine
         {
             RemoveAllLevels();
 
-            switch(number)
+            mainMenuButton = new Button(myGame.width - 32, 32, "square.png");
+            AddChild(mainMenuButton);
+
+            gameUI = new GameUI(this, 2, 2);
+            LateAddChild(gameUI);
+
+            switch (number)
             {
                 case 1:
                     LoadLevel1();

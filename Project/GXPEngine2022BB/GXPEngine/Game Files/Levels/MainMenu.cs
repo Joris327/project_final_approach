@@ -4,13 +4,15 @@ using GXPEngine;
 
 public class MainMenu : Sprite
 {
+    MyGame myGame = MyGame.current;
     LevelManager levelManager;
-    Button startButton = new Button(400, 300, "square.png");
+    Button startButton;
 
     public MainMenu(LevelManager plevelMagager) : base("checkers.png")
     {
         levelManager = plevelMagager;
 
+        startButton = new Button(myGame.width/2, myGame.height/2, "square.png");
         LateAddChild(startButton);
     }
 
