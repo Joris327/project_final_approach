@@ -5,12 +5,11 @@ namespace GXPEngine
 {
     public class Button : AnimationSprite
     {
-        public Button(float pX, int pY, String buttonSprite) : base(buttonSprite, 1, 1, -1, false, false)
+        public Button(float pX, float pY, String buttonSprite, bool pVisible=true) : base(buttonSprite, 1, 1, -1, false, false)
         {
             SetOrigin(width / 2, height / 2);
-
-            x = pX;
-            y = pY;
+            SetXY(pX, pY);
+            visible = pVisible;
         }
 
         public bool CheckIfPressed()

@@ -12,7 +12,7 @@ namespace GXPEngine
 
         bool followMouse = true;
 
-        public PlacebleWall(int pX, int pY, int pRotation, GameUI pGameUI) : base("inventory_placeholder.png")
+        public PlacebleWall(float pX, float pY, int pRotation, GameUI pGameUI) : base("inventory_placeholder.png")
         {
             SetOrigin(width / 2, height / 2);
             SetXY(pX, pY);

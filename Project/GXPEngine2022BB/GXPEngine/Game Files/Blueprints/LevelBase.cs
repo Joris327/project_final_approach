@@ -10,14 +10,13 @@ namespace GXPEngine
 
         LevelManager levelManager;
         readonly Button mainMenuButton = new Button(764, 32, "square.png");
-        readonly Player player = new Player(200, 200);
 
         public LevelBase(LevelManager pLevelManager) : base("colors.png", false, false)
         {
             levelManager = pLevelManager;
 
             AddChild(mainMenuButton);
-            LateAddChild(player);
+            LateAddChild(new Player(200, 200, levelManager));
         }
 
         void Update()

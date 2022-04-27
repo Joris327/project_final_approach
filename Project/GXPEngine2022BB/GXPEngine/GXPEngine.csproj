@@ -41,8 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game Files\Components\PlacebleWall.cs" />
-    <Compile Include="Game Files\Inventory.cs" />
-    <Compile Include="Game Files\Components\Player.cs" />
+    <Compile Include="Game Files\Components\Player\AimLine.cs" />
+    <Compile Include="Game Files\Components\Player\Bullet.cs" />
+    <Compile Include="Game Files\Components\Player\Player.cs" />
     <Compile Include="Game Files\Levels\MainMenu.cs" />
     <Compile Include="Game Files\Components\Button.cs" />
     <Compile Include="Game Files\Blueprints\LevelBase.cs" />
