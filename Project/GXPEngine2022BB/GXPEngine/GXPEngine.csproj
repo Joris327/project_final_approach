@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game Files\Components\Wall.cs" />
+    <Compile Include="Game Files\Inventory.cs" />
     <Compile Include="Game Files\Components\Player.cs" />
     <Compile Include="Game Files\Levels\MainMenu.cs" />
     <Compile Include="Game Files\Components\Button.cs" />

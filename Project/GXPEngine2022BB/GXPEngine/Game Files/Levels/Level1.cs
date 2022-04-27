@@ -5,24 +5,25 @@ namespace GXPEngine
 {
     public class Level1 : Sprite
     {
-        LevelManager levelManager;
-        readonly Button mainMenuButton = new Button(764, 32, "square.png");
-        readonly Player player = new Player(200, 200);
+        MyGame myGame = MyGame.current;
 
-        public Level1(LevelManager pLevelManager) : base("colors.png", false, false)
+        LevelManager levelManager;
+        readonly Inventory inventory;
+
+        readonly Player player;
+
+        public Level1(LevelManager pLevelManager, Inventory pInventory) : base("colors.png", false, false)
         {
             levelManager = pLevelManager;
+            inventory = pInventory;
 
-            AddChild(mainMenuButton);
+            player = new Player(200, 200);
             LateAddChild(player);
         }
 
         void Update()
         {
-            if (mainMenuButton.CheckIfPressed() == true)
-            {
-                levelManager.LoadMainMenu();
-            }
+            
         }
     }
 }

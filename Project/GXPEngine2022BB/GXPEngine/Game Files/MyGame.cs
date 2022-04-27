@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using GXPEngine;
 
 public class MyGame : Game
@@ -7,28 +8,33 @@ public class MyGame : Game
 
 	LevelManager levelManager;
 
+	Canvas pixelUI;
+
 	static void Main()
 	{
 		new MyGame().Start();
 	}
 
-	public MyGame() : base(800, 600, false)
+	public MyGame() : base(1280, 720, false)
 	{
 		targetFps = 60;
+		current = this;
 
 		levelManager = new LevelManager();
 		LateAddChild(levelManager);
+		pixelUI = new Canvas(500, 500, false);
+		LateAddChild(pixelUI);
 	}
 
 	void Update()
 	{
-		if (Input.GetKeyDown(Key.SPACE))
+		if(Input.GetKey(Key.SPACE))
         {
-			levelManager.RemoveAllLevels();
-        }
-		if (Input.GetKeyDown(Key.ZERO))
-        {
-			levelManager.LoadMainMenu();
+			int mouseX = Input.mouseX;
+			int mouseY = Input.mouseY;
+
+			pixelUI.graphics.Clear(Color.Empty);
+			pixelUI.graphics.DrawString(mouseX.ToString() + " " + mouseY.ToString(), SystemFonts.DefaultFont, Brushes.White, 0, 0);
         }
 	}
 }
