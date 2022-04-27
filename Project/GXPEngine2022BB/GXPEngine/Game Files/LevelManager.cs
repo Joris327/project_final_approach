@@ -8,9 +8,9 @@ namespace GXPEngine
         MyGame myGame = MyGame.current;
 
         Button mainMenuButton;
-        Inventory inventory;
+        GameUI gameUI;
 
-        public LevelManager()
+        public LevelManager() : base()
         {
             LoadMainMenu();
         }
@@ -40,8 +40,8 @@ namespace GXPEngine
             mainMenuButton = new Button(myGame.width - 32, 32, "square.png");
             AddChild(mainMenuButton);
 
-            inventory = new Inventory(myGame.width / 2 - 150, myGame.height - 64, this);
-            LateAddChildAt(inventory,0);
+            gameUI = new GameUI(this, 2, 2);
+            LateAddChild(gameUI);
 
             switch (number)
             {
@@ -64,7 +64,7 @@ namespace GXPEngine
 
         void LoadLevel1()
         {
-            Level1 level1 = new Level1(this, inventory);
+            Level1 level1 = new Level1(this);
             LateAddChild(level1);
         }
     }

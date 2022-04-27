@@ -40,13 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game Files\Components\Wall.cs" />
+    <Compile Include="Game Files\Components\PlacebleWall.cs" />
     <Compile Include="Game Files\Inventory.cs" />
     <Compile Include="Game Files\Components\Player.cs" />
     <Compile Include="Game Files\Levels\MainMenu.cs" />
     <Compile Include="Game Files\Components\Button.cs" />
     <Compile Include="Game Files\Blueprints\LevelBase.cs" />
     <Compile Include="Game Files\Levels\Level1.cs" />
+    <Compile Include="Game Files\UI\InventoryBar.cs" />
+    <Compile Include="Game Files\UI\GameUI.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />

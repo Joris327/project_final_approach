@@ -8,8 +8,6 @@ public class MyGame : Game
 
 	LevelManager levelManager;
 
-	Canvas pixelUI;
-
 	static void Main()
 	{
 		new MyGame().Start();
@@ -22,19 +20,10 @@ public class MyGame : Game
 
 		levelManager = new LevelManager();
 		LateAddChild(levelManager);
-		pixelUI = new Canvas(500, 500, false);
-		LateAddChild(pixelUI);
 	}
 
 	void Update()
 	{
-		if(Input.GetKey(Key.SPACE))
-        {
-			int mouseX = Input.mouseX;
-			int mouseY = Input.mouseY;
-
-			pixelUI.graphics.Clear(Color.Empty);
-			pixelUI.graphics.DrawString(mouseX.ToString() + " " + mouseY.ToString(), SystemFonts.DefaultFont, Brushes.White, 0, 0);
-        }
+		
 	}
 }

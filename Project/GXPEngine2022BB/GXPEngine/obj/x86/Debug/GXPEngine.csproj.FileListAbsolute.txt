@@ -19,3 +19,10 @@ C:\Users\joris\Documents\GitHub\project_final_approach\Project\GXPEngine2022BB\G
 C:\Users\joris\Documents\GitHub\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
 C:\Users\joris\Documents\GitHub\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.exe
 C:\Users\joris\Documents\GitHub\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.pdb
+C:\Users\joris\Documents\Game Dev\GitHub\project_final_approach\Project\GXPEngine2022BB\GXPEngine\bin\Debug\GXPEngine.exe.config
+C:\Users\joris\Documents\Game Dev\GitHub\project_final_approach\Project\GXPEngine2022BB\GXPEngine\bin\Debug\GXPEngine.exe
+C:\Users\joris\Documents\Game Dev\GitHub\project_final_approach\Project\GXPEngine2022BB\GXPEngine\bin\Debug\GXPEngine.pdb
+C:\Users\joris\Documents\Game Dev\GitHub\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.csproj.AssemblyReference.cache
+C:\Users\joris\Documents\Game Dev\GitHub\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
+C:\Users\joris\Documents\Game Dev\GitHub\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.exe
+C:\Users\joris\Documents\Game Dev\GitHub\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.pdb

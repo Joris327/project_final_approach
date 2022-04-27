@@ -8,16 +8,14 @@ namespace GXPEngine
         MyGame myGame = MyGame.current;
 
         LevelManager levelManager;
-        readonly Inventory inventory;
 
         readonly Player player;
 
-        public Level1(LevelManager pLevelManager, Inventory pInventory) : base("colors.png", false, false)
+        public Level1(LevelManager pLevelManager) : base("colors.png", false, false)
         {
             levelManager = pLevelManager;
-            inventory = pInventory;
 
-            player = new Player(200, 200);
+            player = new Player(200, 600);
             LateAddChild(player);
         }
 
