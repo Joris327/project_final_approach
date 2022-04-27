@@ -12,7 +12,6 @@ namespace GXPEngine
         MyGame myGame = MyGame.current;
 
         readonly LevelManager levelManager;
-        readonly Sprite inventoryBar;
 
         public int hWallsAmount;
         public int vWallsAmount;
@@ -25,8 +24,6 @@ namespace GXPEngine
             levelManager = pLevelManager;
             hWallsAmount = pHWallsAmount;
             vWallsAmount = pVWallsAmount;
-
-            inventoryBar = new InventoryBar(myGame.width / 2, myGame.height-32);
         }
 
         void Update()
@@ -65,7 +62,7 @@ namespace GXPEngine
 
         void DrawInventory()
         {
-            DrawSprite(inventoryBar);
+            DrawSprite(new InventoryBar(myGame.width / 2, myGame.height - 32));
 
             graphics.DrawString(hWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Blue, width / 2 - 105, height - 32);
             graphics.DrawString(vWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Blue, width / 2 - 35, height - 32);

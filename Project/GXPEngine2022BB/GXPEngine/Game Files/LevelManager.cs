@@ -8,7 +8,6 @@ namespace GXPEngine
         MyGame myGame = MyGame.current;
 
         Button mainMenuButton;
-        GameUI gameUI;
 
         public LevelManager() : base()
         {
@@ -39,9 +38,7 @@ namespace GXPEngine
 
             mainMenuButton = new Button(myGame.width - 32, 32, "square.png");
             AddChild(mainMenuButton);
-
-            gameUI = new GameUI(this, 2, 2);
-            LateAddChild(gameUI);
+            LateAddChild(new GameUI(this, 2, 2));
 
             switch (number)
             {
