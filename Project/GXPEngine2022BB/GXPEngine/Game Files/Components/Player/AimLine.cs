@@ -34,7 +34,10 @@ namespace GXPEngine
             Vec2 velocity = new Vec2(10, 0);
             velocity.SetAngleDeg(rotation + parent.rotation - 90);
 
-            levelManager.LateAddChild(new Bullet(nozzle_Pos.x, nozzle_Pos.y, rotation + parent.rotation, velocity));
+            //levelManager.LateAddChild(new Bullet(nozzle_Pos.x, nozzle_Pos.y, rotation + parent.rotation, velocity));
+            Block bullet = new Block(5, nozzle_Pos, velocity, levelManager);
+            levelManager._movers.Add(bullet);
+            levelManager.AddChild(bullet);
         }
     }
 }

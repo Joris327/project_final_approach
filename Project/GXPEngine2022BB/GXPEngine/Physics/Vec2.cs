@@ -166,4 +166,25 @@ public struct Vec2
 	{
 		return new Vec2(Input.mouseX, Input.mouseY);
 	}
+
+	public float Dot(Vec2 right)
+	{
+
+		return ((this.x * right.x) + (this.y * right.y));
+	}
+
+	public Vec2 Normal()
+	{
+
+		Vec2 vector = new Vec2(-y, x);
+		vector.Normalize();
+		return vector;
+
+	}
+
+	public void Reflect(Vec2 normalLine, float bounciness = 1.0f)
+	{
+
+		this = this - (1 + bounciness) * (this.Dot(normalLine)) * normalLine;
+	}
 }

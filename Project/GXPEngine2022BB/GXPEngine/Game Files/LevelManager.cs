@@ -1,5 +1,6 @@
 ﻿using System;
 using GXPEngine;
+using System.Collections.Generic;
 
 namespace GXPEngine
 {
@@ -9,9 +10,12 @@ namespace GXPEngine
 
         Button mainMenuButton;
 
+        public List<Block> _movers;
+
         public LevelManager() : base()
         {
             LoadMainMenu();
+            _movers = new List<Block>();
         }
 
         void Update()
@@ -21,6 +25,25 @@ namespace GXPEngine
                 if (mainMenuButton.CheckIfPressed() == true)
                 {
                     LoadMainMenu();
+                }
+            }
+
+            if(_movers.Count > 0)
+            {
+                foreach (Block bullet in _movers)
+                {
+                    bullet.Step();
+
+                    /*
+                    if (bullet.x > myGame.width + bullet.width || // if (offscreen)
+                        bullet.x < 0 - bullet.width ||
+                        bullet.y > myGame.height + bullet.height ||
+                        bullet.y < 0 - bullet.height)
+                    {
+                        _movers.Remove(bullet);
+                        bullet.LateDestroy();
+                    }
+                    */
                 }
             }
         }

@@ -92,6 +92,11 @@
     <Compile Include="GXPEngine\SoLoud\Soloud.cs" />
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
     <Compile Include="Game Files\LevelManager.cs" />
+    <Compile Include="Physics\Objects\Ball.cs" />
+    <Compile Include="Physics\Debug\Arrow.cs" />
+    <Compile Include="Physics\Static Objects\LineSegment.cs" />
+    <Compile Include="Physics\Static Objects\NLineSegment.cs" />
+    <Compile Include="Physics\Objects\Block.cs" />
     <Compile Include="Physics\Vec2.cs" />
   </ItemGroup>
   <ItemGroup />
