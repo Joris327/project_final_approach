@@ -6,25 +6,30 @@ using System.Threading.Tasks;
 
 namespace GXPEngine
 {
-    public class PlacebleWall : Sprite
+    public class PlacableWall : Sprite
     {
-        GameUI gameUI;
+        LevelUI gameUI;
 
         bool followMouse = true;
 
-        public PlacebleWall(float pX, float pY, int pRotation, GameUI pGameUI) : base("inventory_placeholder.png")
+        public PlacableWall(float pX, float pY, int pRotation, LevelUI pGameUI) : base("WallTexture.png")
         {
-            SetOrigin(width / 2, height / 2);
+            SetOrigin(0, 37.5f);
             SetXY(pX, pY);
             rotation = pRotation;
             gameUI = pGameUI;
+
+            AddRigidBody();
         }
 
         void Update()
         {
             if (followMouse == true)
             {
-                SetXY(Input.mouseX, Input.mouseY);
+                if (rotation == 0) SetXY(Input.mouseX - 37.5f, Input.mouseY - 37.5f);
+                if (rotation == 90) SetXY(Input.mouseX + 37.5f, Input.mouseY - 37.5f);
+
+
                 if (Input.GetKeyDown(Key.BACKSPACE))
                 {
                     if (rotation == 0) gameUI.hWallsAmount++;
@@ -37,6 +42,12 @@ namespace GXPEngine
             {
                 followMouse = false;
             }
+        }
+
+        void AddRigidBody()
+        {
+            LateAddChild(new Block(37.5f, new Vec2(36.5f, 0), new Vec2(), true, false));
+            LateAddChild(new Block(37.5f, new Vec2(36.5f, 76), new Vec2(), true, false));
         }
     }
 }

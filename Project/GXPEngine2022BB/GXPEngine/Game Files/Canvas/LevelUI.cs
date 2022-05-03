@@ -7,11 +7,10 @@ using System.Drawing;
 
 namespace GXPEngine
 {
-    public class GameUI : Canvas
+    public class LevelUI : Canvas
     {
-        MyGame myGame = MyGame.current;
-
-        readonly LevelManager levelManager;
+        readonly MyGame myGame = MyGame.current;
+        readonly LevelManager levelManager = LevelManager.current;
 
         public int hWallsAmount;
         public int vWallsAmount;
@@ -19,9 +18,8 @@ namespace GXPEngine
         int mouseX = Input.mouseX;
         int mouseY = Input.mouseY;
 
-        public GameUI(LevelManager pLevelManager, int pHWallsAmount, int pVWallsAmount) : base(1280, 720, false)
+        public LevelUI(int pHWallsAmount, int pVWallsAmount) : base(1280, 720, false)
         {
-            levelManager = pLevelManager;
             hWallsAmount = pHWallsAmount;
             vWallsAmount = pVWallsAmount;
         }
@@ -36,7 +34,11 @@ namespace GXPEngine
             if (Input.GetKey(Key.SPACE)) DrawMouseCoords();
 
             DrawInventory();
+            InventoryFunctionality();
+        }
 
+        void InventoryFunctionality()
+        {
             if (mouseY < height &&
                 mouseY > height - 64 &&
                 Input.GetMouseButtonDown(0))
@@ -45,7 +47,7 @@ namespace GXPEngine
                     mouseX > width / 2 - 150 &&
                     hWallsAmount > 0)
                 {
-                    PlacebleWall wallh = new PlacebleWall(mouseX, mouseY, 0, this);
+                    PlacableWall wallh = new PlacableWall(mouseX, mouseY, 0, this);
                     levelManager.LateAddChild(wallh);
                     --hWallsAmount;
                 }
@@ -53,7 +55,7 @@ namespace GXPEngine
                          mouseX > width / 2 - 80 &&
                          vWallsAmount > 0)
                 {
-                    PlacebleWall wallv = new PlacebleWall(mouseX, mouseY, 90, this);
+                    PlacableWall wallv = new PlacableWall(mouseX, mouseY, 90, this);
                     levelManager.LateAddChild(wallv);
                     --vWallsAmount;
                 }

@@ -16,7 +16,7 @@ public class Block : EasyDraw
 	// For ease of testing / changing, we assume every block has the same acceleration (gravity):
 	public static Vec2 acceleration = new Vec2(0, 0);
 
-	public readonly int radius;
+	public readonly float radius;
 
 	// Mass = density * volume.
 	// In 2D, we assume volume = area (=all objects are assumed to have the same "depth")
@@ -55,23 +55,27 @@ public class Block : EasyDraw
 
 	const float _colorFadeSpeed = 0.025f;
 
-	LevelManager levelManager;
+	LevelManager levelManager = LevelManager.current;
 
 	Canvas _lineContainer = null;
 
 	int _bounces = 10;
 
+	bool followMouse = false;
+
 	/******* PUBLIC METHODS *******************************************************************/
 
-	public Block(int pRadius, Vec2 pPosition, Vec2 pVelocity, LevelManager pLevelManager) : base(pRadius * 2, pRadius * 2)
+	public Block(float pradius, Vec2 pPosition, Vec2 pVelocity, bool pFollowMouse=false, bool visible=true) : base((int)pradius * 2, (int)pradius * 2)
 	{
-		radius = pRadius;
+		radius = pradius;
 		_position = pPosition;
 		velocity = pVelocity;
-		levelManager = pLevelManager;
+		followMouse = pFollowMouse;
+
+		//if (followMouse) LateAddChild(new PlacableWall(x, y, 0, new GameUI(new LevelManager(), 0, 0)));
 
 		SetOrigin(radius, radius);
-		Draw();
+		if (visible == true) Draw();
 		UpdateScreenPosition();
 		_oldPosition = new Vec2(0, 0);
 		//	bounciness = 1.0f;
@@ -86,7 +90,7 @@ public class Block : EasyDraw
 	public void Gravity()
 	{
 
-		if (Input.GetKeyDown(Key.E)) graf = !graf;
+		//if (Input.GetKeyDown(Key.E)) graf = !graf;
 
 		if (graf)
 		{
@@ -113,13 +117,21 @@ public class Block : EasyDraw
 		//Step();
 		//Gizmos.DrawArrow(_position.x, _position.y, velocity.x * 10, velocity.y * 10);
 
+		//if (followMouse)
+		{
+			//x = Input.mouseX;
+			//y = Input.mouseY;
+
+			//if (Input.GetMouseButtonDown(0)) followMouse = false;
+		}
+
 		if (x > myGame.width + radius ||
 			x < 0 - radius ||
 			y > myGame.height + radius ||
 			y < 0 - radius ||
 			_bounces <= 0)
 		{
-			levelManager._movers.Remove(this);
+			myGame._movers.Remove(this);
 			this.LateDestroy();
 		}
 	}
@@ -130,9 +142,10 @@ public class Block : EasyDraw
 
 		// No need to make changes in this Step method (most of it is related to drawing, color and debug info). 
 		// Work in Move instead.
+
 		Gravity();
 		Move();
-		UpdateColor();
+		//UpdateColor();
 		UpdateScreenPosition();
 		ShowDebugInfo();
 	}
@@ -154,7 +167,7 @@ public class Block : EasyDraw
 		_position += velocity;
 
 		CheckBoundaryCollisions();
-		//CheckBlockOverlaps();
+		CheckBlockOverlaps();
 		ResolveCollision(side, firstTOI, firstColBlock);
 		// Example methods (replace/extend):
 
@@ -189,7 +202,6 @@ public class Block : EasyDraw
 	{
 	}
 
-	// This method is just an example of how to check boundaries, and change color.
 	void CheckBoundaryCollisions()
 	{
 		MyGame myGame = (MyGame)game;
@@ -283,7 +295,6 @@ public class Block : EasyDraw
 		}
 	}
 
-	// This method is just an example of how to get information about other blocks in the scene.
 	void CheckBlockOverlaps()
 	{
 		MyGame myGame = (MyGame)game;

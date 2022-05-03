@@ -6,16 +6,16 @@ namespace GXPEngine
 {
     public class LevelManager : GameObject
     {
+        public static LevelManager current;
         MyGame myGame = MyGame.current;
 
         Button mainMenuButton;
 
-        public List<Block> _movers;
-
         public LevelManager() : base()
         {
+            current = this;
+
             LoadMainMenu();
-            _movers = new List<Block>();
         }
 
         void Update()
@@ -27,31 +27,12 @@ namespace GXPEngine
                     LoadMainMenu();
                 }
             }
-
-            if(_movers.Count > 0)
-            {
-                foreach (Block bullet in _movers)
-                {
-                    bullet.Step();
-
-                    /*
-                    if (bullet.x > myGame.width + bullet.width || // if (offscreen)
-                        bullet.x < 0 - bullet.width ||
-                        bullet.y > myGame.height + bullet.height ||
-                        bullet.y < 0 - bullet.height)
-                    {
-                        _movers.Remove(bullet);
-                        bullet.LateDestroy();
-                    }
-                    */
-                }
-            }
         }
 
         public void LoadMainMenu()
         {
             RemoveAllLevels();
-            MainMenu mainMenu = new MainMenu(this);
+            MainMenu mainMenu = new MainMenu();
             LateAddChild(mainMenu);
         }
 
@@ -61,7 +42,7 @@ namespace GXPEngine
 
             mainMenuButton = new Button(myGame.width - 32, 32, "square.png");
             AddChild(mainMenuButton);
-            LateAddChild(new GameUI(this, 2, 2));
+            LateAddChild(new LevelUI(2, 2));
 
             switch (number)
             {
@@ -84,7 +65,7 @@ namespace GXPEngine
 
         void LoadLevel1()
         {
-            Level1 level1 = new Level1(this);
+            Level1 level1 = new Level1();
             LateAddChild(level1);
         }
     }

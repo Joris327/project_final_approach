@@ -1,15 +1,18 @@
 using System;
 using System.Drawing;
+using System.Collections.Generic;
 using GXPEngine;
 
 public class MyGame : Game
 {
 	public static MyGame current; // to access mygame from another class put this in the declarations: MyGame myGame = MyGame.current;
 
-	public float LeftXBoundary = 0;
-	public float RightXBoundary = 0;
-	public float TopYBoundary = 0;
-	public float BottomYBoundary = 0;
+	public List<Block> _movers = new List<Block>();
+
+	public float LeftXBoundary;
+	public float RightXBoundary;
+	public float TopYBoundary;
+	public float BottomYBoundary;
 
 	static void Main()
 	{
@@ -21,19 +24,35 @@ public class MyGame : Game
 		targetFps = 60;
 		current = this;
 
+		LeftXBoundary = 64;
+		RightXBoundary = width - 64;
+		TopYBoundary = 64;
+		BottomYBoundary = height - 64;
+
 		LateAddChild(new LevelManager());
+	}
+
+	void Update()
+    {
+		if (_movers.Count > 0)
+		{
+			foreach (Block bullet in _movers)
+			{
+				bullet.Step();
+			}
+		}
 	}
 
 	public int GetNumberOfMovers()
     {
-		return 1;
-    }
+		return _movers.Count;
+	}
 
 	public Block GetMover(int index)
 	{
-		//if (index >= 0 && index < _movers.Count)
+		if (index >= 0 && index < _movers.Count)
 		{
-			//return _movers[index];
+			return _movers[index];
 		}
 		return null;
 	}
