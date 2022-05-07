@@ -36,9 +36,9 @@ public class MyGame : Game
     {
 		if (_movers.Count > 0)
 		{
-			foreach (Block bullet in _movers)
+			foreach (Block b in _movers)
 			{
-				bullet.Step();
+				b.Step();
 			}
 		}
 	}

@@ -36,7 +36,7 @@ namespace GXPEngine
             LateAddChild(mainMenu);
         }
 
-        public void LoadLevel(int number)
+        public void LoadLevel(int index)
         {
             RemoveAllLevels();
 
@@ -44,7 +44,7 @@ namespace GXPEngine
             AddChild(mainMenuButton);
             LateAddChild(new LevelUI(2, 2));
 
-            switch (number)
+            switch (index)
             {
                 case 1:
                     LoadLevel1();
@@ -61,6 +61,13 @@ namespace GXPEngine
             {
                 levelObject.LateDestroy();
             }
+
+            foreach (Block b in myGame._movers)
+            {
+                b.LateDestroy();
+            }
+
+            myGame._movers.Clear();
         }
 
         void LoadLevel1()

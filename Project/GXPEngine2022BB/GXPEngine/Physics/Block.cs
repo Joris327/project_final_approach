@@ -11,7 +11,7 @@ public class Block : EasyDraw
 
 	// These four public static fields are changed from MyGame, based on key input (see Console):
 	public static bool drawDebugLine = true;
-	public static bool wordy = false;
+	public static bool wordy = true;
 	public static float bounciness = 1;
 	// For ease of testing / changing, we assume every block has the same acceleration (gravity):
 	public static Vec2 acceleration = new Vec2(0, 0);
@@ -44,7 +44,7 @@ public class Block : EasyDraw
 
 	/******* PRIVATE FIELDS *******************************************************************/
 
-	Vec2 _position;
+	public Vec2 _position;
 	Vec2 _oldPosition;
 
 	float _red = 1;
@@ -61,24 +61,30 @@ public class Block : EasyDraw
 
 	int _bounces = 10;
 
-	bool followMouse = false;
+	public bool canCollide;
+
+	bool Visible;
+	//public bool followMouse = false;
 
 	/******* PUBLIC METHODS *******************************************************************/
 
-	public Block(float pradius, Vec2 pPosition, Vec2 pVelocity, bool pFollowMouse=false, bool visible=true) : base((int)pradius * 2, (int)pradius * 2)
+	public Block(float pradius, Vec2 pPosition, Vec2 pVelocity, bool pcanCollide=true, bool pVisible=true) : base((int)pradius * 2, (int)pradius * 2)
 	{
 		radius = pradius;
 		_position = pPosition;
 		velocity = pVelocity;
-		followMouse = pFollowMouse;
+		canCollide = pcanCollide;
+		//if (canCollide == false) followMouse = true;
+		Visible = pVisible;
 
 		//if (followMouse) LateAddChild(new PlacableWall(x, y, 0, new GameUI(new LevelManager(), 0, 0)));
 
 		SetOrigin(radius, radius);
-		if (visible == true) Draw();
+		if (Visible == true) Draw();
+		//Draw();
 		UpdateScreenPosition();
 		_oldPosition = new Vec2(0, 0);
-		//	bounciness = 1.0f;
+		//bounciness = 1.0f;
 		acceleration = new Vec2(0, (100f * 9.81f) / Mass);
 
 		_lineContainer = new Canvas(myGame.width, myGame.height, false);
@@ -115,6 +121,7 @@ public class Block : EasyDraw
 	{
 		// For extra testing flexibility, we call the Step method from MyGame instead:
 		//Step();
+
 		//Gizmos.DrawArrow(_position.x, _position.y, velocity.x * 10, velocity.y * 10);
 
 		//if (followMouse)
@@ -125,6 +132,29 @@ public class Block : EasyDraw
 			//if (Input.GetMouseButtonDown(0)) followMouse = false;
 		}
 
+		if (Input.GetKeyDown(Key.D)) Draw();
+
+		if (_bounces <= 0) //...destroy this object
+		{
+			int index = -1;
+
+			foreach (Block b in myGame._movers) // remove this class from the _movers list
+            {
+				if (b == this)
+				{
+					index = myGame._movers.IndexOf(b);
+				}
+            }
+
+			if (index != -1) myGame._movers.RemoveAt(index);
+			LateDestroy();
+		}
+		
+
+		/*
+		if (canCollide == false) return;
+		else if (Visible == false) return;
+
 		if (x > myGame.width + radius ||
 			x < 0 - radius ||
 			y > myGame.height + radius ||
@@ -134,18 +164,25 @@ public class Block : EasyDraw
 			myGame._movers.Remove(this);
 			this.LateDestroy();
 		}
+		*/
 	}
 
 	public void Step()
 	{
 		_oldPosition = _position;
 
+		if (Visible == false)
+		{
+			UpdateScreenPosition();
+			return;
+		}
+
 		// No need to make changes in this Step method (most of it is related to drawing, color and debug info). 
 		// Work in Move instead.
 
 		Gravity();
 		Move();
-		//UpdateColor();
+		UpdateColor();
 		UpdateScreenPosition();
 		ShowDebugInfo();
 	}
@@ -156,6 +193,7 @@ public class Block : EasyDraw
 
 	void Move()
 	{
+		if (canCollide == false) return;
 		// TODO: implement Assignment 3 here (and in methods called from here).
 
 		firstTOI = 1.0f;
@@ -169,6 +207,7 @@ public class Block : EasyDraw
 		CheckBoundaryCollisions();
 		CheckBlockOverlaps();
 		ResolveCollision(side, firstTOI, firstColBlock);
+
 		// Example methods (replace/extend):
 
 		// TIP: You can use the CollisionInfo class to pass information between methods, e.g.:
@@ -309,7 +348,7 @@ public class Block : EasyDraw
 				(this._position.y + this.radius > other._position.y - other.radius) &&
 				(this._position.y - this.radius < other._position.y + other.radius))
 				{
-
+					_bounces--;
 					//LEFT COLLISSION
 					if (_position.x - radius < other._position.x + other.radius)
 					{
@@ -514,6 +553,8 @@ public class Block : EasyDraw
 
 	void UpdateScreenPosition()
 	{
+		//if (Visible == false) return;
+
 		x = _position.x;
 		y = _position.y;
 	}
