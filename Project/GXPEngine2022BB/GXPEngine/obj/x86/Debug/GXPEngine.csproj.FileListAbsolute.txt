@@ -26,3 +26,11 @@ C:\Users\joris\Documents\Game Dev\GitHub\project_final_approach\Project\GXPEngin
 C:\Users\joris\Documents\Game Dev\GitHub\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
 C:\Users\joris\Documents\Game Dev\GitHub\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.exe
 C:\Users\joris\Documents\Game Dev\GitHub\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.pdb
+C:\Users\jaspe\Documents\Saxion\CMGT\2021-2022\Trimester 4\project_final_approach\Project\GXPEngine2022BB\GXPEngine\bin\Debug\GXPEngine.exe.config
+C:\Users\jaspe\Documents\Saxion\CMGT\2021-2022\Trimester 4\project_final_approach\Project\GXPEngine2022BB\GXPEngine\bin\Debug\GXPEngine.exe
+C:\Users\jaspe\Documents\Saxion\CMGT\2021-2022\Trimester 4\project_final_approach\Project\GXPEngine2022BB\GXPEngine\bin\Debug\GXPEngine.pdb
+C:\Users\jaspe\Documents\Saxion\CMGT\2021-2022\Trimester 4\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.csproj.AssemblyReference.cache
+C:\Users\jaspe\Documents\Saxion\CMGT\2021-2022\Trimester 4\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.csproj.SuggestedBindingRedirects.cache
+C:\Users\jaspe\Documents\Saxion\CMGT\2021-2022\Trimester 4\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.csproj.CoreCompileInputs.cache
+C:\Users\jaspe\Documents\Saxion\CMGT\2021-2022\Trimester 4\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.exe
+C:\Users\jaspe\Documents\Saxion\CMGT\2021-2022\Trimester 4\project_final_approach\Project\GXPEngine2022BB\GXPEngine\obj\x86\Debug\GXPEngine.pdb
