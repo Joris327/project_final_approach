@@ -4,13 +4,13 @@ namespace GXPEngine
 {
     public class AimLine : Sprite
     {
-        LevelManager levelManager;
+        readonly MyGame myGame = MyGame.current;
+        readonly LevelManager levelManager = LevelManager.current;
 
-        public AimLine(float pX, float pY, LevelManager pLevelManager) : base("triangle.png", false)
+        public AimLine(float pX, float pY) : base("triangle.png", false)
         {
             SetOrigin(width / 2, 1.5f*height);
             SetXY(pX, pY);
-            levelManager = pLevelManager;
         }
 
         void Update()
@@ -34,7 +34,10 @@ namespace GXPEngine
             Vec2 velocity = new Vec2(10, 0);
             velocity.SetAngleDeg(rotation + parent.rotation - 90);
 
-            levelManager.LateAddChild(new Bullet(nozzle_Pos.x, nozzle_Pos.y, rotation + parent.rotation, velocity));
+            //levelManager.LateAddChild(new Bullet(nozzle_Pos.x, nozzle_Pos.y, rotation + parent.rotation, velocity));
+            Block bullet = new Block(5, nozzle_Pos, velocity);
+            myGame._movers.Add(bullet);
+            levelManager.AddChild(bullet);
         }
     }
 }

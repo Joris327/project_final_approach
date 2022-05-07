@@ -40,16 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Game Files\Components\PlacebleWall.cs" />
-    <Compile Include="Game Files\Components\Player\AimLine.cs" />
-    <Compile Include="Game Files\Components\Player\Bullet.cs" />
-    <Compile Include="Game Files\Components\Player\Player.cs" />
+    <Compile Include="Game Files\PlacableWall.cs" />
+    <Compile Include="Game Files\Player\AimLine.cs" />
+    <Compile Include="Game Files\Player\Bullet.cs" />
+    <Compile Include="Game Files\Player\Player.cs" />
     <Compile Include="Game Files\Levels\MainMenu.cs" />
-    <Compile Include="Game Files\Components\Button.cs" />
-    <Compile Include="Game Files\Blueprints\LevelBase.cs" />
+    <Compile Include="Game Files\Button.cs" />
+    <Compile Include="Game Files\Levels\LevelBase.cs" />
     <Compile Include="Game Files\Levels\Level1.cs" />
-    <Compile Include="Game Files\UI\InventoryBar.cs" />
-    <Compile Include="Game Files\UI\GameUI.cs" />
+    <Compile Include="Game Files\Canvas\InventoryBar.cs" />
+    <Compile Include="Game Files\Canvas\LevelUI.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />
@@ -92,6 +92,11 @@
     <Compile Include="GXPEngine\SoLoud\Soloud.cs" />
     <Compile Include="GXPEngine\SoLoud\SoloudSoundSystem.cs" />
     <Compile Include="Game Files\LevelManager.cs" />
+    <Compile Include="Physics\Other\Ball.cs" />
+    <Compile Include="Physics\Other\Arrow.cs" />
+    <Compile Include="Physics\Other\LineSegment.cs" />
+    <Compile Include="Physics\Other\NLineSegment.cs" />
+    <Compile Include="Physics\Block.cs" />
     <Compile Include="Physics\Vec2.cs" />
   </ItemGroup>
   <ItemGroup />
