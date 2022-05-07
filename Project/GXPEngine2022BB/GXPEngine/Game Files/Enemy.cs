@@ -9,8 +9,6 @@ namespace GXPEngine
 {
     public class Enemy : AnimationSprite
     {
-
-        LevelManager levelManager;
         public Enemy(float pX, float pY) : base("barry.png", 7, 1)
         {
             SetOrigin(width / 2, height / 2);
@@ -23,9 +21,8 @@ namespace GXPEngine
         {
             if (other is Block)
             {
-                Console.WriteLine("Hit");
+                //Console.WriteLine("Hit");
                 this.LateDestroy();
-
             }
         }
     }

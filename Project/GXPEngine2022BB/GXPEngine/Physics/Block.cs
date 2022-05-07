@@ -7,8 +7,6 @@ public class Block : EasyDraw
 {
 	MyGame myGame = MyGame.current;
 
-	/******* PUBLIC FIELDS AND PROPERTIES *********************************************************/
-
 	// These four public static fields are changed from MyGame, based on key input (see Console):
 	public static bool drawDebugLine = true;
 	public static bool wordy = true;
@@ -42,8 +40,6 @@ public class Block : EasyDraw
 	public float firstTOI = 0;
 	public Block firstColBlock = null;
 
-	/******* PRIVATE FIELDS *******************************************************************/
-
 	public Vec2 _position;
 	Vec2 _oldPosition;
 
@@ -64,9 +60,6 @@ public class Block : EasyDraw
 	public bool canCollide;
 
 	bool Visible;
-	//public bool followMouse = false;
-
-	/******* PUBLIC METHODS *******************************************************************/
 
 	public Block(float pradius, Vec2 pPosition, Vec2 pVelocity, bool pcanCollide=true, bool pVisible=true) : base((int)pradius * 2, (int)pradius * 2)
 	{
@@ -74,10 +67,7 @@ public class Block : EasyDraw
 		_position = pPosition;
 		velocity = pVelocity;
 		canCollide = pcanCollide;
-		//if (canCollide == false) followMouse = true;
 		Visible = pVisible;
-
-		//if (followMouse) LateAddChild(new PlacableWall(x, y, 0, new GameUI(new LevelManager(), 0, 0)));
 
 		SetOrigin(radius, radius);
 		if (Visible == true) Draw();
@@ -119,19 +109,6 @@ public class Block : EasyDraw
 
 	public void Update()
 	{
-		// For extra testing flexibility, we call the Step method from MyGame instead:
-		//Step();
-
-		//Gizmos.DrawArrow(_position.x, _position.y, velocity.x * 10, velocity.y * 10);
-
-		//if (followMouse)
-		{
-			//x = Input.mouseX;
-			//y = Input.mouseY;
-
-			//if (Input.GetMouseButtonDown(0)) followMouse = false;
-		}
-
 		if (Input.GetKeyDown(Key.D)) Draw();
 
 		if (_bounces <= 0) //...destroy this object
@@ -149,22 +126,6 @@ public class Block : EasyDraw
 			if (index != -1) myGame._movers.RemoveAt(index);
 			LateDestroy();
 		}
-		
-
-		/*
-		if (canCollide == false) return;
-		else if (Visible == false) return;
-
-		if (x > myGame.width + radius ||
-			x < 0 - radius ||
-			y > myGame.height + radius ||
-			y < 0 - radius ||
-			_bounces <= 0)
-		{
-			myGame._movers.Remove(this);
-			this.LateDestroy();
-		}
-		*/
 	}
 
 	public void Step()
@@ -177,9 +138,6 @@ public class Block : EasyDraw
 			return;
 		}
 
-		// No need to make changes in this Step method (most of it is related to drawing, color and debug info). 
-		// Work in Move instead.
-
 		Gravity();
 		Move();
 		UpdateColor();
@@ -187,14 +145,9 @@ public class Block : EasyDraw
 		ShowDebugInfo();
 	}
 
-	/******* PRIVATE METHODS *******************************************************************/
-
-	/******* THIS IS WHERE YOU SHOULD WORK: ***************************************************/
-
 	void Move()
 	{
 		if (canCollide == false) return;
-		// TODO: implement Assignment 3 here (and in methods called from here).
 
 		firstTOI = 1.0f;
 		//side 1 is left, 2 is right, 3 is top, 4 is down;
@@ -207,14 +160,6 @@ public class Block : EasyDraw
 		CheckBoundaryCollisions();
 		CheckBlockOverlaps();
 		ResolveCollision(side, firstTOI, firstColBlock);
-
-		// Example methods (replace/extend):
-
-		// TIP: You can use the CollisionInfo class to pass information between methods, e.g.:
-		//
-		//Collision firstCollision=FindEarliestCollision();
-		//if (firstCollision!=null)
-		//	ResolveCollision(firstCollision);
 	}
 
 	float POI(float Impact, bool onYAxis)
@@ -226,19 +171,13 @@ public class Block : EasyDraw
 		{
 			if (position.y - _oldPosition.y == 0) return 10;
 			timeOfInpact = (Impact - _oldPosition.y) / (_position.y - _oldPosition.y);
-			//	  Console.WriteLine(timeOfInpact);
 		}
 		else
 		{
 			if (position.x - _oldPosition.x == 0) return 10;
 			timeOfInpact = (Impact - _oldPosition.x) / (_position.x - _oldPosition.x);
-			//    Console.WriteLine(timeOfInpact);
 		}
 		return timeOfInpact;
-	}
-
-	void Bounce(float time)
-	{
 	}
 
 	void CheckBoundaryCollisions()
@@ -247,7 +186,6 @@ public class Block : EasyDraw
 		if (_position.x - radius < myGame.LeftXBoundary)
 		{
 			_bounces--;
-			//	_position.x += velocity.x;
 
 			float impact = (myGame.LeftXBoundary + radius);
 			float TOI = POI(impact, false);
@@ -258,8 +196,6 @@ public class Block : EasyDraw
 				side = 1;
 			}
 
-			// move block from left to right boundary:
-			//	_position.x += myGame.RightXBoundary - myGame.LeftXBoundary - 2 * radius;
 			SetFadeColor(1, 0.2f, 0.2f);
 			if (wordy)
 			{
@@ -269,7 +205,6 @@ public class Block : EasyDraw
 		else if (_position.x + radius > myGame.RightXBoundary)
 		{
 			_bounces--;
-			//	_position.x += velocity.x;
 
 			float impact = (myGame.RightXBoundary - radius);
 			float TOI = POI(impact, false);
@@ -280,9 +215,6 @@ public class Block : EasyDraw
 				Console.WriteLine(firstTOI);
 			}
 
-			//	velocity.x *= bounciness;
-			// move block from right to left boundary:
-			//	_position.x -= myGame.RightXBoundary - myGame.LeftXBoundary - 2 * radius;
 			SetFadeColor(1, 0.2f, 0.2f);
 			if (wordy)
 			{
@@ -293,8 +225,7 @@ public class Block : EasyDraw
 		if (_position.y - radius < myGame.TopYBoundary)
 		{
 			_bounces--;
-			// move block from top to bottom boundary:
-			//_position.y += velocity.y;
+
 			float impact = (myGame.TopYBoundary + radius);
 			float TOI = POI(impact, true);
 			if (TOI < firstTOI)
@@ -303,7 +234,6 @@ public class Block : EasyDraw
 				side = 3;
 			}
 
-			//	_position.y += myGame.BottomYBoundary - myGame.TopYBoundary - 2 * radius;
 			SetFadeColor(0.2f, 1, 0.2f);
 
 			if (wordy)
@@ -314,8 +244,7 @@ public class Block : EasyDraw
 		else if (_position.y + radius > myGame.BottomYBoundary)
 		{
 			_bounces--;
-			// move block from bottom to top boundary:
-			//_position.y += velocity.y;
+
 			float impact = (myGame.BottomYBoundary - radius);
 
 			float TOI = POI(impact, true);
@@ -325,7 +254,6 @@ public class Block : EasyDraw
 				side = 3;
 			}
 
-			//_position.y -= myGame.BottomYBoundary - myGame.TopYBoundary - 2 * radius;
 			SetFadeColor(0.2f, 1, 0.2f);
 			if (wordy)
 			{
@@ -342,7 +270,6 @@ public class Block : EasyDraw
 			Block other = myGame.GetMover(i);
 			if (other != this)
 			{
-				// TODO: improve hit test, move to method:
 				if ((this._position.x + this.radius > other._position.x - other.radius) &&
 				(this._position.x - this.radius < other._position.x + other.radius) &&
 				(this._position.y + this.radius > other._position.y - other.radius) &&
@@ -397,7 +324,6 @@ public class Block : EasyDraw
 
 							if (!((newy < (other.position.y - other.radius) && newy2 < (other.position.y - other.radius)) || newy > (other.position.y + other.radius) && newy2 > (other.position.y + other.radius)))
 							{
-								//	Console.WriteLine(TOI);
 								firstColBlock = other;
 								firstTOI = TOI;
 								side = 2;
@@ -431,7 +357,6 @@ public class Block : EasyDraw
 					//BOTTOM COLLISION
 					if (_position.y + radius > other._position.y - other.radius)
 					{
-						// move block from bottom to top boundary:
 						float impact = (other._position.y - other.radius - this.radius);
 
 						float TOI = POI(impact, true);
@@ -519,8 +444,6 @@ public class Block : EasyDraw
 		}
 	}
 
-	/******* NO NEED TO CHANGE ANY OF THE CODE BELOW: **********************************************/
-
 	void UpdateColor()
 	{
 		if (_red < 1)
@@ -553,8 +476,6 @@ public class Block : EasyDraw
 
 	void UpdateScreenPosition()
 	{
-		//if (Visible == false) return;
-
 		x = _position.x;
 		y = _position.y;
 	}
