@@ -52,8 +52,8 @@ namespace GXPEngine
                 if (Input.GetMouseButtonDown(0))
                 {
                     followMouse = false;
-                    BlockA.canCollide = true;
-                    BlockB.canCollide = true;
+                    //BlockA.canCollide = true;
+                    //BlockB.canCollide = true;
                 }
             }
         }

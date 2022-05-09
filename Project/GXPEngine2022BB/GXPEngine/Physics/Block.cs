@@ -132,7 +132,7 @@ public class Block : EasyDraw
 	{
 		_oldPosition = _position;
 
-		if (Visible == false)
+		if (canCollide == false)
 		{
 			UpdateScreenPosition();
 			return;
