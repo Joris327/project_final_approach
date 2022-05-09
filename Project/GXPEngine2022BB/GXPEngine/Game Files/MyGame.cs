@@ -34,13 +34,17 @@ public class MyGame : Game
 
 	void Update()
     {
-		if (_movers.Count > 0)
+		StepThroughMovers();
+	}
+
+	void StepThroughMovers()
+	{
+		foreach (Block bullet in _movers)
 		{
-			foreach (Block b in _movers)
-			{
-				b.Step();
-			}
+			bullet.Step();
 		}
+
+		foreach (Block b in _movers) b.Step();
 	}
 
 	public int GetNumberOfMovers()

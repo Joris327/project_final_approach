@@ -61,10 +61,13 @@ public class Block : EasyDraw
 
 	bool Visible;
 
-
+<<<<<<< HEAD
 	public float angle;
 
+	public Block(float pradius, Vec2 pPosition, Vec2 pVelocity, bool pcanCollide=true, bool pVisible=true) : base((int)pradius * 2, (int)pradius * 2)
+=======
 	public Block(float pradius, Vec2 pPosition, Vec2 pVelocity, bool pcanCollide=true, bool pVisible=true, int density=1) : base((int)pradius * 2, (int)pradius * 2)
+>>>>>>> Static-Walls
 	{
 		radius = pradius;
 		_position = pPosition;
