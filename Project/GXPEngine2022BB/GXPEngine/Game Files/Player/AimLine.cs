@@ -35,13 +35,13 @@ namespace GXPEngine
             velocity.SetAngleDeg(rotation + parent.rotation - 90);
 
             //levelManager.LateAddChild(new Bullet(nozzle_Pos.x, nozzle_Pos.y, rotation + parent.rotation, velocity));
-            Block bullet = new Block(5, nozzle_Pos, velocity,true, true);
+            Block bulletObject = new Block(5, nozzle_Pos, velocity, true, false);
         
-            myGame._movers.Add(bullet);
-            Bullet bullet1 = new Bullet(rotation);
-            bullet.AddChild(bullet1);
-            levelManager.AddChild(bullet);
-            
+            myGame._movers.Add(bulletObject);
+            levelManager.AddChild(bulletObject);
+
+            Bullet bulletSprite = new Bullet(rotation);
+            bulletObject.AddChild(bulletSprite);
         }
     }
 }

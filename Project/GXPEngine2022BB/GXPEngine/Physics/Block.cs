@@ -473,7 +473,7 @@ public class Block : EasyDraw
 	{
 		if (drawDebugLine)
 		{
-			//DrawLine(_oldPosition, _position);
+			DrawLine(_oldPosition, _position);
 		}
 	}
 
@@ -487,9 +487,9 @@ public class Block : EasyDraw
 
 	void Draw()
 	{
-		//Fill(200);
-		//NoStroke();
-		//ShapeAlign(CenterMode.Min, CenterMode.Min);
-		//Rect(0, 0, width, height);
+		Fill(200);
+		NoStroke();
+		ShapeAlign(CenterMode.Min, CenterMode.Min);
+		Rect(0, 0, width, height);
 	}
 }

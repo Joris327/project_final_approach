@@ -9,7 +9,7 @@ public class MyGame : Game
 
 	public List<Block> _movers = new List<Block>();
 
-	public float LeftXBoundary;
+	public float LeftXBoundary; //default is set in constructor
 	public float RightXBoundary;
 	public float TopYBoundary;
 	public float BottomYBoundary;
