@@ -11,6 +11,9 @@ namespace GXPEngine
 
         Button mainMenuButton;
         Button reloadButton;
+        Button nextLevelButton;
+
+        int currentLevel = 0;
 
         public LevelManager() : base()
         {
@@ -30,11 +33,22 @@ namespace GXPEngine
             {
                 LoadLevel(1);
             }
+
+            if (nextLevelButton != null)
+            {
+                if (FindObjectOfType(typeof(Enemy)) != null)
+                {
+                    nextLevelButton.SetColor(255, 0, 0);
+                }
+                else if (nextLevelButton.CheckIfPressed() == true) LoadLevel(currentLevel + 1);
+                else nextLevelButton.SetColor(255, 255, 255);
+            }
         }
 
         public void LoadMainMenu()
         {
             RemoveAllLevels();
+
             MainMenu mainMenu = new MainMenu();
             LateAddChild(mainMenu);
         }
@@ -43,13 +57,18 @@ namespace GXPEngine
         {
             RemoveAllLevels();
 
+            currentLevel = index;
+
             reloadButton = new Button(myGame.width - 32, 32, "checkers.png");
-            LateAddChild(reloadButton);
+            AddChild(reloadButton);
 
             mainMenuButton = new Button(myGame.width - 94, 32, "square.png");
             AddChild(mainMenuButton);
 
-            LateAddChild(new LevelUI(2, 2));
+            nextLevelButton = new Button(myGame.width - 160, 32, "colors.png");
+            AddChild(nextLevelButton);
+
+            AddChild(new LevelUI(2, 2));
 
             switch (index)
             {
