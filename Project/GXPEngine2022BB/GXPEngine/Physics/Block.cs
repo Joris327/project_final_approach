@@ -61,7 +61,7 @@ public class Block : EasyDraw
 
 	bool Visible;
 
-	public Block(float pradius, Vec2 pPosition, Vec2 pVelocity, bool pcanCollide=true, bool pVisible=true) : base((int)pradius * 2, (int)pradius * 2)
+	public Block(float pradius, Vec2 pPosition, Vec2 pVelocity, bool pcanCollide=true, bool pVisible=true, int density=1) : base((int)pradius * 2, (int)pradius * 2)
 	{
 		radius = pradius;
 		_position = pPosition;
@@ -78,7 +78,9 @@ public class Block : EasyDraw
 		acceleration = new Vec2(0, (100f * 9.81f) / Mass);
 
 		_lineContainer = new Canvas(myGame.width, myGame.height, false);
-		levelManager.AddChild(_lineContainer); 
+		levelManager.AddChild(_lineContainer);
+
+		_density = density;
 	}
 
 	bool graf = false;
@@ -115,15 +117,13 @@ public class Block : EasyDraw
 		{
 			int index = -1;
 
-			foreach (Block b in myGame._movers) // remove this class from the _movers list
+			foreach (Block b in myGame._movers) // remove this block from the _movers list
             {
-				if (b == this)
-				{
-					index = myGame._movers.IndexOf(b);
-				}
-            }
+				if (b == this) index = myGame._movers.IndexOf(b);
+			}
 
 			if (index != -1) myGame._movers.RemoveAt(index);
+			
 			LateDestroy();
 		}
 	}

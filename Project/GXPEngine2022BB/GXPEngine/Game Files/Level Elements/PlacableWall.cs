@@ -60,8 +60,8 @@ namespace GXPEngine
 
         void AddRigidBody()
         {
-            BlockA = new Block(37.5f, new Vec2(100, 150), new Vec2(), false, false);
-            BlockB = new Block(37.5f, new Vec2(100, 200), new Vec2(), false, false);
+            BlockA = new Block(37.5f, new Vec2(100, 150), new Vec2(), false, false, 999);
+            BlockB = new Block(37.5f, new Vec2(100, 200), new Vec2(), false, false, 999);
 
             myGame.LateAddChild(BlockA);
             myGame.LateAddChild(BlockB);
