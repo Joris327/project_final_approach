@@ -4,7 +4,7 @@ namespace GXPEngine
 {
     public class Bullet : Sprite
     {
-        MyGame myGame = MyGame.current;
+        readonly MyGame myGame = MyGame.current;
 
         Vec2 velocity;
 

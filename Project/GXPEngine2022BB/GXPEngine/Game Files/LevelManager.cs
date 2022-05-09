@@ -7,9 +7,10 @@ namespace GXPEngine
     public class LevelManager : GameObject
     {
         public static LevelManager current;
-        MyGame myGame = MyGame.current;
+        readonly MyGame myGame = MyGame.current;
 
         Button mainMenuButton;
+        Button reloadButton;
 
         public LevelManager() : base()
         {
@@ -20,12 +21,14 @@ namespace GXPEngine
 
         void Update()
         {
-            if (mainMenuButton != null)
+            if (mainMenuButton != null && mainMenuButton.CheckIfPressed() == true)
             {
-                if (mainMenuButton.CheckIfPressed() == true)
-                {
-                    LoadMainMenu();
-                }
+                LoadMainMenu();
+            }
+
+            if (reloadButton != null && reloadButton.CheckIfPressed() == true)
+            {
+                LoadLevel(1);
             }
         }
 
@@ -40,14 +43,21 @@ namespace GXPEngine
         {
             RemoveAllLevels();
 
-            mainMenuButton = new Button(myGame.width - 32, 32, "square.png");
+            reloadButton = new Button(myGame.width - 32, 32, "checkers.png");
+            LateAddChild(reloadButton);
+
+            mainMenuButton = new Button(myGame.width - 94, 32, "square.png");
             AddChild(mainMenuButton);
+
             LateAddChild(new LevelUI(2, 2));
 
             switch (index)
             {
                 case 1:
-                    LoadLevel1();
+                    LateAddChild(new Level1());
+                    break;
+                case 2:
+                    LateAddChild(new Level2());
                     break;
                 default:
                     LoadMainMenu();
@@ -68,12 +78,6 @@ namespace GXPEngine
             }
 
             myGame._movers.Clear();
-        }
-
-        void LoadLevel1()
-        {
-            Level1 level1 = new Level1();
-            LateAddChild(level1);
         }
     }
 }

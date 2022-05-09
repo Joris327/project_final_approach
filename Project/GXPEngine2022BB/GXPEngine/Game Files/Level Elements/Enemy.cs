@@ -19,7 +19,7 @@ namespace GXPEngine
 
         void OnCollision(GameObject other)
         {
-            if (other is Block)
+            if (other is Bullet)
             {
                 //Console.WriteLine("Hit");
                 this.LateDestroy();

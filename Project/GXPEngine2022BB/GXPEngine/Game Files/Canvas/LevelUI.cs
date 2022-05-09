@@ -18,6 +18,8 @@ namespace GXPEngine
         int mouseX = Input.mouseX;
         int mouseY = Input.mouseY;
 
+        public bool holdingObject = false;
+
         public LevelUI(int pHWallsAmount, int pVWallsAmount) : base(1280, 720, false)
         {
             hWallsAmount = pHWallsAmount;
@@ -41,7 +43,8 @@ namespace GXPEngine
         {
             if (mouseY < height &&
                 mouseY > height - 64 &&
-                Input.GetMouseButtonDown(0))
+                Input.GetMouseButtonDown(0) &&
+                holdingObject == false)
             {
                 if (mouseX < width / 2 - 80 &&
                     mouseX > width / 2 - 150 &&
@@ -50,6 +53,7 @@ namespace GXPEngine
                     PlacableWall wallh = new PlacableWall(mouseX, mouseY, 0, this);
                     levelManager.LateAddChild(wallh);
                     --hWallsAmount;
+                    holdingObject = true;
                 }
                 else if (mouseX < width / 2 - 10 &&
                          mouseX > width / 2 - 80 &&
@@ -58,6 +62,7 @@ namespace GXPEngine
                     PlacableWall wallv = new PlacableWall(mouseX, mouseY, 90, this);
                     levelManager.LateAddChild(wallv);
                     --vWallsAmount;
+                    holdingObject = true;
                 }
             }
         }
