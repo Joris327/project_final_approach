@@ -61,6 +61,8 @@ public class Block : EasyDraw
 
 	bool Visible;
 
+	public float angle;
+
 	public Block(float pradius, Vec2 pPosition, Vec2 pVelocity, bool pcanCollide=true, bool pVisible=true) : base((int)pradius * 2, (int)pradius * 2)
 	{
 		radius = pradius;
@@ -417,7 +419,7 @@ public class Block : EasyDraw
 			Vec2 relPos = _oldPosition - other.position;
 			Vec2 relVel = velocity - other.velocity;
 
-			float angle = relVel.Dot(relPos);
+			angle = relVel.Dot(relPos);
 
 			if (angle >= 0) return;
 
@@ -470,7 +472,7 @@ public class Block : EasyDraw
 	{
 		if (drawDebugLine)
 		{
-			DrawLine(_oldPosition, _position);
+			//DrawLine(_oldPosition, _position);
 		}
 	}
 
@@ -480,11 +482,13 @@ public class Block : EasyDraw
 		y = _position.y;
 	}
 
+	
+
 	void Draw()
 	{
-		Fill(200);
-		NoStroke();
-		ShapeAlign(CenterMode.Min, CenterMode.Min);
-		Rect(0, 0, width, height);
+		//Fill(200);
+		//NoStroke();
+		//ShapeAlign(CenterMode.Min, CenterMode.Min);
+		//Rect(0, 0, width, height);
 	}
 }
