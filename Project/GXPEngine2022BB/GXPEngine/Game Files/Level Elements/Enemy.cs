@@ -31,7 +31,7 @@ namespace GXPEngine
             if (other is Bullet)
             {
                 //Console.WriteLine("Hit");
-                explosion.Play();
+                explosion.Play(false, 0, 0.75f);
                 this.LateDestroy();
             }
         }

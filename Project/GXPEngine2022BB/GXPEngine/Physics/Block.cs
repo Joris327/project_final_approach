@@ -16,8 +16,6 @@ public class Block : EasyDraw
 
 	public readonly float radius;
 
-	AnimationSprite ricochetEffect = new AnimationSprite("Ricochet.gif", 1, 1);
-
 	// Mass = density * volume.
 	// In 2D, we assume volume = area (=all objects are assumed to have the same "depth")
 	public float Mass
@@ -87,8 +85,6 @@ public class Block : EasyDraw
 		levelManager.AddChild(_lineContainer);
 
 		_density = density;
-
-		AddChild(ricochetEffect);
 	}
 
 	bool graf = false;
@@ -136,8 +132,6 @@ public class Block : EasyDraw
 		}
 
 		CheckOffscreen();
-
-		ricochetEffect.Animate();
 	}
 
 	public void Step()
