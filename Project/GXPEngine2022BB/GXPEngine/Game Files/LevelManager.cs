@@ -52,16 +52,17 @@ namespace GXPEngine
 
         public void LoadControls()
         {
+            
             RemoveAllLevels();
-            Options options = new Options();
-            LateAddChild(options);
+            Controls controls = new Controls();
+            LateAddChild(controls);
         }
 
         public void LoadOptions()
         {
             RemoveAllLevels();
-            Controls controls = new Controls();
-            LateAddChild(controls);
+            Options options = new Options();
+            LateAddChild(options);
         }
 
         public void LoadMainMenu()

@@ -14,11 +14,9 @@ public class MainMenu : Sprite
     public MainMenu() : base("checkers.png")
     {
         startButton = new Button(myGame.width/2, myGame.height/2, "square.png");
-        optionsButton = new Button(myGame.width / 2, myGame.height / 2 + 64, "square.png");
-        controlsButton = new Button(myGame.width / 2, myGame.height / 2 + 128, "square.png");
-        exitButton = new Button(myGame.width / 2, myGame.height / 2 + 192, "square.png");
+        controlsButton = new Button(myGame.width / 2, myGame.height / 2 + 64, "square.png");
+        exitButton = new Button(myGame.width / 2, myGame.height / 2 + 128, "square.png");
 
-        LateAddChild(optionsButton);
         LateAddChild(controlsButton);
         LateAddChild(exitButton);
         LateAddChild(startButton);
@@ -34,11 +32,6 @@ public class MainMenu : Sprite
         if(exitButton.CheckIfPressed() == true)
         {
             myGame.Destroy();   
-        }
-
-        if(optionsButton.CheckIfPressed() == true)
-        {
-            levelManager.LoadOptions();
         }
 
         if (controlsButton.CheckIfPressed() == true)
