@@ -15,6 +15,8 @@ namespace GXPEngine
 
         int currentLevel = 0;
 
+        public int ammo = 3;
+
         public LevelManager() : base()
         {
             current = this;
@@ -31,17 +33,20 @@ namespace GXPEngine
 
             if (reloadButton != null && reloadButton.CheckIfPressed() == true)
             {
-                LoadLevel(1);
+                LoadLevel(currentLevel);
             }
 
             if (nextLevelButton != null)
             {
+                /*
                 if (FindObjectOfType(typeof(Enemy)) != null)
                 {
                     nextLevelButton.SetColor(255, 0, 0);
                 }
                 else if (nextLevelButton.CheckIfPressed() == true) LoadLevel(currentLevel + 1);
                 else nextLevelButton.SetColor(255, 255, 255);
+                */
+                if (nextLevelButton.CheckIfPressed() == true) LoadLevel(currentLevel + 1);
             }
         }
 
@@ -59,28 +64,42 @@ namespace GXPEngine
 
             currentLevel = index;
 
-            reloadButton = new Button(myGame.width - 32, 32, "checkers.png");
-            AddChild(reloadButton);
+            ammo = 3;
 
-            mainMenuButton = new Button(myGame.width - 94, 32, "square.png");
-            AddChild(mainMenuButton);
-
-            nextLevelButton = new Button(myGame.width - 160, 32, "colors.png");
-            AddChild(nextLevelButton);
-
-            AddChild(new LevelUI(2, 2));
+            bool mainMenu = false;
 
             switch (index)
             {
                 case 1:
-                    LateAddChild(new Level1());
+                    AddChild(new Level1());
+                    AddChild(new LevelUI(0, 0));
                     break;
                 case 2:
-                    LateAddChild(new Level2());
+                    AddChild(new Level2());
+                    AddChild(new LevelUI(0, 0));
+                    break;
+                case 3:
+                    AddChild(new Level3());
+                    AddChild(new LevelUI(0, 1));
                     break;
                 default:
                     LoadMainMenu();
+                    mainMenu = true;
                     break;
+            }
+
+            
+
+            if (mainMenu == false)
+            {
+                reloadButton = new Button(myGame.width - 32, 32, "checkers.png");
+                AddChild(reloadButton);
+
+                mainMenuButton = new Button(myGame.width - 94, 32, "square.png");
+                AddChild(mainMenuButton);
+
+                nextLevelButton = new Button(myGame.width - 160, 32, "colors.png");
+                AddChild(nextLevelButton);
             }
         }
 

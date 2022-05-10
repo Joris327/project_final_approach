@@ -6,24 +6,26 @@ namespace GXPEngine
     {
         readonly MyGame myGame = MyGame.current;
 
-        Vec2 velocity;
+        Block bullet;
 
-        float new_rotation;
-
-        public Bullet(float pRotation) : base("triangle.png")
+        public Bullet(float pRotation, Block pbullet) : base("triangle.png")
         {
             SetOrigin(width / 2, height / 2);
-            new_rotation = pRotation;
             SetScaleXY(0.5f, 0.5f);
-            
-            //velocity.SetAngleDeg(rotation - 90);
+
+            bullet = pbullet;
         }
 
 
         void Update()
         {
+            TurnTowardsVelocity();
+        }
 
-            rotation = new_rotation;
+        void TurnTowardsVelocity()
+        {
+            Vec2 velocity = bullet.velocity;
+            rotation = velocity.GetAngleDeg() - parent.rotation + 90;
         }
     }
 }

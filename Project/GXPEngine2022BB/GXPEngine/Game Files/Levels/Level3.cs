@@ -3,11 +3,11 @@ using GXPEngine;
 
 namespace GXPEngine
 {
-    public class Level2 : Sprite
+    public class Level3 : Sprite
     {
         MyGame myGame = MyGame.current;
 
-        public Level2() : base("BQK.png", false, false)
+        public Level3() : base("BQK.png", false, false)
         {
             myGame.LeftXBoundary = -64;
             myGame.RightXBoundary = width + 64;
@@ -15,9 +15,9 @@ namespace GXPEngine
             myGame.BottomYBoundary = height + 64;
 
             LateAddChild(new Player(200, 600));
-            LateAddChild(new Enemy(600, 200));
-            LateAddChild(new Enemy(600, 450));
-            LateAddChild(new StaticWall(950, 300));
+            LateAddChild(new Enemy(650, 200));
+            LateAddChild(new Enemy(950, 450));
+            LateAddChild(new StaticWall(650, 500));
             //LateAddChild(new StaticWall(150, 600));
         }
     }

@@ -16,6 +16,8 @@ public class Block : EasyDraw
 
 	public readonly float radius;
 
+	AnimationSprite ricochetEffect = new AnimationSprite("Ricochet.gif", 1, 1);
+
 	// Mass = density * volume.
 	// In 2D, we assume volume = area (=all objects are assumed to have the same "depth")
 	public float Mass
@@ -61,6 +63,7 @@ public class Block : EasyDraw
 
 	bool Visible;
 
+	Sound ricochet = new Sound("ground ricochet.mp3");
 
 	public float angle;
 
@@ -84,6 +87,8 @@ public class Block : EasyDraw
 		levelManager.AddChild(_lineContainer);
 
 		_density = density;
+
+		AddChild(ricochetEffect);
 	}
 
 	bool graf = false;
@@ -129,6 +134,10 @@ public class Block : EasyDraw
 			
 			LateDestroy();
 		}
+
+		CheckOffscreen();
+
+		ricochetEffect.Animate();
 	}
 
 	public void Step()
@@ -147,6 +156,26 @@ public class Block : EasyDraw
 		UpdateScreenPosition();
 		ShowDebugInfo();
 	}
+
+	void CheckOffscreen()
+    {
+		if (x < 0 - radius||
+			x > myGame.width + radius ||
+			y < 0 - radius ||
+			y > myGame.height + radius)
+        {
+			int index = -1;
+
+			foreach (Block b in myGame._movers) // remove this block from the _movers list
+			{
+				if (b == this) index = myGame._movers.IndexOf(b);
+			}
+
+			if (index != -1) myGame._movers.RemoveAt(index);
+
+			this.LateDestroy();
+        }
+    }
 
 	void Move()
 	{
@@ -204,6 +233,8 @@ public class Block : EasyDraw
 			{
 				Console.WriteLine("Left boundary collision");
 			}
+
+			ricochet.Play();
 		}
 		else if (_position.x + radius > myGame.RightXBoundary)
 		{
@@ -223,6 +254,8 @@ public class Block : EasyDraw
 			{
 				Console.WriteLine("Right boundary collision");
 			}
+
+			ricochet.Play();
 		}
 
 		if (_position.y - radius < myGame.TopYBoundary)
@@ -243,6 +276,8 @@ public class Block : EasyDraw
 			{
 				Console.WriteLine("Top boundary collision");
 			}
+
+			ricochet.Play();
 		}
 		else if (_position.y + radius > myGame.BottomYBoundary)
 		{
@@ -262,6 +297,8 @@ public class Block : EasyDraw
 			{
 				Console.WriteLine("Bottom boundary collision");
 			}
+
+			ricochet.Play();
 		}
 	}
 
@@ -387,6 +424,8 @@ public class Block : EasyDraw
 					{
 						Console.WriteLine("Block-block overlap detected.");
 					}
+
+					ricochet.Play();
 				}
 			}
 		}

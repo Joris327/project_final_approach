@@ -7,16 +7,27 @@ namespace GXPEngine
         readonly MyGame myGame = MyGame.current;
         readonly LevelManager levelManager = LevelManager.current;
 
+        Sound gunshot = new Sound("gunshot without the gun noises.mp3");
+        int shotDelaySetup = 10;
+        int shotDelay;
+        bool hasShot = false;
+
         public AimLine(float pX, float pY) : base("triangle.png", false)
         {
             SetOrigin(width / 2, 1.5f*height);
             SetXY(pX, pY);
+
+            shotDelay = shotDelaySetup;
         }
 
         void Update()
         {
             TurnTowardsMouse();
-            if (Input.GetKeyDown(Key.S)) Shoot();
+
+            if (Input.GetKeyDown(Key.S) && levelManager.ammo > 0)
+            {
+                Shoot();
+            }
         }
 
         void TurnTowardsMouse()
@@ -40,8 +51,11 @@ namespace GXPEngine
             myGame._movers.Add(bulletObject);
             levelManager.AddChild(bulletObject);
 
-            Bullet bulletSprite = new Bullet(rotation);
+            Bullet bulletSprite = new Bullet(rotation, bulletObject);
             bulletObject.AddChild(bulletSprite);
+
+            gunshot.Play();
+            levelManager.ammo--;
         }
     }
 }

@@ -24,6 +24,8 @@ namespace GXPEngine
         {
             hWallsAmount = pHWallsAmount;
             vWallsAmount = pVWallsAmount;
+
+            AddChild(new AmmoDisplay());
         }
 
         void Update()

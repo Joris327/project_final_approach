@@ -40,10 +40,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game Files\Canvas\AmmoDisplay.cs" />
     <Compile Include="Game Files\Level Elements\Enemy.cs" />
     <Compile Include="Game Files\Level Elements\PlacableWall.cs" />
     <Compile Include="Game Files\Level Elements\StaticWall.cs" />
     <Compile Include="Game Files\Levels\Level2.cs" />
+    <Compile Include="Game Files\Levels\Level3.cs" />
     <Compile Include="Game Files\Player\AimLine.cs" />
     <Compile Include="Game Files\Player\Bullet.cs" />
     <Compile Include="Game Files\Player\Player.cs" />
