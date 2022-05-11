@@ -14,6 +14,7 @@ public class MyGame : Game
 	public float TopYBoundary;
 	public float BottomYBoundary;
 	public Boolean soundOn = true;
+	public Boolean musicOn = true;
 
 	static void Main()
 	{

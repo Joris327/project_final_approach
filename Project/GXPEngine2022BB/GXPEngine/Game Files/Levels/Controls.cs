@@ -15,10 +15,10 @@ namespace GXPEngine
         public Controls() : base("controls_background.png", false, false)
         {
             Console.WriteLine("Sound on = " + myGame.soundOn);
+            Console.WriteLine("Music on = " + myGame.musicOn);
             returnButton = new Button(1150, 650, "square.png");
             
-            musicButton = new Button(808, 610, "colors.png");
-            LateAddChild(musicButton);
+            
             LateAddChild(returnButton);
 
             if (myGame.soundOn == true)
@@ -32,6 +32,17 @@ namespace GXPEngine
                 LateAddChild(soundButton);
             }
 
+            if (myGame.musicOn == true)
+            {
+                musicButton = new Button(808, 610, "colors.png");
+                LateAddChild(musicButton);
+            }
+            else if (myGame.musicOn == false)
+            {
+                musicButton = new Button(808, 610, "checkers.png");
+                LateAddChild(musicButton);
+            }
+
 
         }
 
@@ -39,6 +50,7 @@ namespace GXPEngine
         {
 
             Boolean sButtonPressed = soundButton.CheckIfPressed();
+            Boolean mButtonPressed = musicButton.CheckIfPressed();
 
             if (returnButton.CheckIfPressed() == true)
             {
@@ -68,7 +80,30 @@ namespace GXPEngine
                 //System.Threading.Thread.Sleep(1000);
             }
 
-            
+            if (mButtonPressed && musicButton.bSprite == "colors.png")
+            {
+                musicButton.Remove();
+                musicButton = new Button(808, 610, "checkers.png");
+                LateAddChild(musicButton);
+                myGame.musicOn = false;
+                mButtonPressed = false;
+                Console.WriteLine("Music on = " + myGame.musicOn);
+                //System.Threading.Thread.Sleep(1000);
+            }
+
+            if (mButtonPressed == true && musicButton.bSprite == "checkers.png")
+            {
+
+                musicButton.Remove();
+                musicButton = new Button(808, 610, "colors.png");
+                LateAddChild(musicButton);
+                myGame.musicOn = true;
+                mButtonPressed = false;
+                Console.WriteLine("Music on = " + myGame.musicOn);
+                //System.Threading.Thread.Sleep(1000);
+            }
+
+
         }
     }
 }
