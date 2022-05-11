@@ -46,6 +46,7 @@ namespace GXPEngine
                 else if (Input.GetMouseButtonDown(1))
                 {
                     ReturnToInventory();
+                    levelUI.holdingObject = false;
                 }
             }
             else
