@@ -21,7 +21,7 @@ namespace GXPEngine
         {
             current = this;
 
-            LoadMainMenu();
+            LoadLevel(6);
         }
 
         void Update()
@@ -31,7 +31,7 @@ namespace GXPEngine
                 LoadMainMenu();
             }
 
-            if (reloadButton != null && reloadButton.CheckIfPressed() == true)
+            if (reloadButton != null && reloadButton.CheckIfPressed() == true || Input.GetKeyDown(Key.BACKSPACE))
             {
                 LoadLevel(currentLevel);
             }
@@ -72,15 +72,27 @@ namespace GXPEngine
             {
                 case 1:
                     AddChild(new Level1());
-                    AddChild(new LevelUI(0, 0));
+                    AddChild(new LevelUI(0,0));
                     break;
                 case 2:
                     AddChild(new Level2());
-                    AddChild(new LevelUI(0, 0));
+                    AddChild(new LevelUI(0,0));
                     break;
                 case 3:
                     AddChild(new Level3());
-                    AddChild(new LevelUI(0, 1));
+                    AddChild(new LevelUI(0,1));
+                    break;
+                case 4:
+                    AddChild(new Level4());
+                    AddChild(new LevelUI(1,2));
+                    break;
+                case 5:
+                    AddChild(new Level5());
+                    AddChild(new LevelUI(2, 1));
+                    break;
+                case 6:
+                    AddChild(new Level6());
+                    AddChild(new LevelUI(1, 0));
                     break;
                 default:
                     LoadMainMenu();
@@ -90,7 +102,7 @@ namespace GXPEngine
 
             
 
-            if (mainMenu == false)
+            if (mainMenu == false) //prevents the buttons on the top right appearing on the main menu when loading from this method.
             {
                 reloadButton = new Button(myGame.width - 32, 32, "checkers.png");
                 AddChild(reloadButton);
@@ -103,7 +115,7 @@ namespace GXPEngine
             }
         }
 
-        public void RemoveAllLevels()
+        void RemoveAllLevels()
         {
             foreach(GameObject levelObject in this.GetChildren())
             {

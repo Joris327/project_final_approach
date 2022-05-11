@@ -43,6 +43,10 @@ namespace GXPEngine
                     placeWall.Play();
                     levelUI.holdingObject = false;
                 }
+                else if (Input.GetMouseButtonDown(1))
+                {
+                    ReturnToInventory();
+                }
             }
             else
             {
@@ -166,8 +170,23 @@ namespace GXPEngine
 
         void ReturnToInventory()
         {
-            if (rotation == 0) levelUI.hWallsAmount++;
-            else if (rotation == 90) levelUI.vWallsAmount++;
+            if (rotation == 0) levelUI.vWallsAmount++;
+            else if (rotation == 90) levelUI.hWallsAmount++;
+
+            BlockA.LateDestroy();
+            BlockB.LateDestroy();
+
+            int indexA = -1;
+            int indexB = -1;
+
+            foreach(Block b in myGame._movers)
+            {
+                if (b == BlockA) indexA = myGame._movers.IndexOf(b);
+                else if (b == BlockB) indexB = myGame._movers.IndexOf(b);
+            }
+
+            if (indexA != -1) myGame._movers.RemoveAt(indexA);
+            if (indexB!= -1) myGame._movers.RemoveAt(indexB-1);
 
             LateDestroy();
         }
@@ -176,7 +195,7 @@ namespace GXPEngine
         {
             Console.WriteLine("collided");
 
-            if (other is PlacableWall || other is StaticWall || other is Enemy || other is Player || other is AimLine)
+            if (other is PlacableWall || other is StaticWall || other is Enemy || other is Player || other is AimLine || other is Crate || other is Platform)
             {
                 obstructed = true;
                 obstructedlastFrame = true;

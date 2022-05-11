@@ -41,11 +41,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game Files\Canvas\AmmoDisplay.cs" />
+    <Compile Include="Game Files\Level Elements\Crate.cs" />
     <Compile Include="Game Files\Level Elements\Enemy.cs" />
     <Compile Include="Game Files\Level Elements\PlacableWall.cs" />
+    <Compile Include="Game Files\Level Elements\Platform.cs" />
     <Compile Include="Game Files\Level Elements\StaticWall.cs" />
     <Compile Include="Game Files\Levels\Level2.cs" />
     <Compile Include="Game Files\Levels\Level3.cs" />
+    <Compile Include="Game Files\Levels\Level4.cs" />
+    <Compile Include="Game Files\Levels\Level5.cs" />
+    <Compile Include="Game Files\Levels\Level6.cs" />
     <Compile Include="Game Files\Player\AimLine.cs" />
     <Compile Include="Game Files\Player\Bullet.cs" />
     <Compile Include="Game Files\Player\Player.cs" />
@@ -55,6 +60,7 @@
     <Compile Include="Game Files\Levels\Level1.cs" />
     <Compile Include="Game Files\Canvas\InventoryBar.cs" />
     <Compile Include="Game Files\Canvas\LevelUI.cs" />
+    <Compile Include="Game Files\Sparks.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />

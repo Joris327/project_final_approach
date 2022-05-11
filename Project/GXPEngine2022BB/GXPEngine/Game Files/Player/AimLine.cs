@@ -8,16 +8,11 @@ namespace GXPEngine
         readonly LevelManager levelManager = LevelManager.current;
 
         Sound gunshot = new Sound("gunshot without the gun noises.mp3");
-        int shotDelaySetup = 10;
-        int shotDelay;
-        bool hasShot = false;
 
         public AimLine(float pX, float pY) : base("mcharacter2.png", false)
         {
             SetOrigin(0, height/2);
             SetXY(pX, pY);
-
-            shotDelay = shotDelaySetup;
         }
 
         void Update()
@@ -45,7 +40,6 @@ namespace GXPEngine
             Vec2 velocity = new Vec2(10, 0);
             velocity.SetAngleDeg(rotation + parent.rotation);
 
-            //levelManager.LateAddChild(new Bullet(nozzle_Pos.x, nozzle_Pos.y, rotation + parent.rotation, velocity));
             Block bulletObject = new Block(5, nozzle_Pos, velocity, true, false);
         
             myGame._movers.Add(bulletObject);

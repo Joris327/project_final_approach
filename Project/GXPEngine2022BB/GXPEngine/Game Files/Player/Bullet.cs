@@ -8,10 +8,11 @@ namespace GXPEngine
 
         Block bullet;
 
-        public Bullet(float pRotation, Block pbullet) : base("triangle.png")
+        public Bullet(float pRotation, Block pbullet) : base("Bullet_Small.png")
         {
             SetOrigin(width / 2, height / 2);
-            SetScaleXY(0.5f, 0.5f);
+            SetScaleXY(1.5f, 1.5f);
+
 
             bullet = pbullet;
         }

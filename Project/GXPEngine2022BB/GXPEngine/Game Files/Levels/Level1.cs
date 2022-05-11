@@ -5,7 +5,8 @@ namespace GXPEngine
 {
     public class Level1 : Sprite
     {
-        MyGame myGame = MyGame.current;
+        readonly MyGame myGame = MyGame.current;
+        readonly LevelManager levelManager = LevelManager.current;
 
         public Level1() : base("BQK.png", false, false)
         {
@@ -15,13 +16,9 @@ namespace GXPEngine
             myGame.BottomYBoundary = height + 64;
 
             LateAddChild(new Player(150, 500));
-            //LateAddChild(new Enemy(600, 460));
-            //LateAddChild(new Enemy(400, 160));
-            //LateAddChild(new StaticWall(600, 550, 90));
-            //LateAddChild(new StaticWall(400, 250, 90));
-            //LateAddChild(new StaticWall(1000, 500));
 
             LateAddChild(new Enemy(700, 500));
+            LateAddChild(new Platform(705, 575));
         }
     }
 }

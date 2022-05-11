@@ -65,6 +65,10 @@ public class Block : EasyDraw
 
 	public float angle;
 
+	int lives = 2;
+
+	bool wasInCrateLastFrame = false;
+
 	public Block(float pradius, Vec2 pPosition, Vec2 pVelocity, bool pcanCollide=true, bool pVisible=true, int density=1) : base((int)pradius * 2, (int)pradius * 2)
 	{
 		radius = pradius;
@@ -117,21 +121,27 @@ public class Block : EasyDraw
 	{
 		if (Input.GetKeyDown(Key.D)) Draw();
 
-		if (_bounces <= 0) //...destroy this object
-		{
-			int index = -1;
+		if (_bounces <= 0) SelfDestruct();
 
-			foreach (Block b in myGame._movers) // remove this block from the _movers list
-            {
-				if (b == this) index = myGame._movers.IndexOf(b);
-			}
-
-			if (index != -1) myGame._movers.RemoveAt(index);
-			
-			LateDestroy();
-		}
+		if (lives <= 0) SelfDestruct();
 
 		CheckOffscreen();
+
+		wasInCrateLastFrame = false;
+	}
+
+	void SelfDestruct()
+    {
+		int index = -1;
+
+		foreach (Block b in myGame._movers) // remove this block from the _movers list
+		{
+			if (b == this) index = myGame._movers.IndexOf(b);
+		}
+
+		if (index != -1) myGame._movers.RemoveAt(index);
+
+		LateDestroy();
 	}
 
 	public void Step()
@@ -158,16 +168,7 @@ public class Block : EasyDraw
 			y < 0 - radius ||
 			y > myGame.height + radius)
         {
-			int index = -1;
-
-			foreach (Block b in myGame._movers) // remove this block from the _movers list
-			{
-				if (b == this) index = myGame._movers.IndexOf(b);
-			}
-
-			if (index != -1) myGame._movers.RemoveAt(index);
-
-			this.LateDestroy();
+			SelfDestruct();
         }
     }
 
@@ -225,7 +226,7 @@ public class Block : EasyDraw
 			SetFadeColor(1, 0.2f, 0.2f);
 			if (wordy)
 			{
-				Console.WriteLine("Left boundary collision");
+				//Console.WriteLine("Left boundary collision");
 			}
 
 			ricochet.Play();
@@ -240,13 +241,13 @@ public class Block : EasyDraw
 			{
 				firstTOI = TOI;
 				side = 2;
-				Console.WriteLine(firstTOI);
+				//Console.WriteLine(firstTOI);
 			}
 
 			SetFadeColor(1, 0.2f, 0.2f);
 			if (wordy)
 			{
-				Console.WriteLine("Right boundary collision");
+				//Console.WriteLine("Right boundary collision");
 			}
 
 			ricochet.Play();
@@ -268,7 +269,7 @@ public class Block : EasyDraw
 
 			if (wordy)
 			{
-				Console.WriteLine("Top boundary collision");
+				//Console.WriteLine("Top boundary collision");
 			}
 
 			ricochet.Play();
@@ -289,7 +290,7 @@ public class Block : EasyDraw
 			SetFadeColor(0.2f, 1, 0.2f);
 			if (wordy)
 			{
-				Console.WriteLine("Bottom boundary collision");
+				//Console.WriteLine("Bottom boundary collision");
 			}
 
 			ricochet.Play();
@@ -332,7 +333,6 @@ public class Block : EasyDraw
 								side = 1;
 							}
 						}
-
 					}
 
 					//RIGHT COLLISION
@@ -424,7 +424,23 @@ public class Block : EasyDraw
 			}
 		}
 
-		Console.WriteLine(side);
+		//Console.WriteLine(side);
+		
+		switch (side) // left=1, right=2, top=3, bottom=4.
+        {
+			case 1:
+				myGame.LateAddChild(new Sparks(x+40, y-20, 90));
+				break;
+			case 2:
+				myGame.LateAddChild(new Sparks(x-40, y+20, 270));
+				break;
+			case 3:
+				myGame.LateAddChild(new Sparks(x+25, y+42, 180));
+				break;
+			case 4:
+				myGame.LateAddChild(new Sparks(x-10, y-45, 0));
+				break;
+		}
 	}
 
 	void ResolveCollision(int side, float TOI, Block other = null)
@@ -440,14 +456,19 @@ public class Block : EasyDraw
 			{
 				_position = _oldPosition + firstTOI * velocity;
 				velocity.x *= -bounciness;
+
+				//if (side == 1) LateAddChild(new Sparks(_position.x, _position.y, 90));
+				//else if (side == 2) LateAddChild(new Sparks(_position.x, _position.y, 270));
 			}
 			else if (side == 3 || side == 4)
 			{
 				_position = _oldPosition + firstTOI * velocity;
 				velocity.y *= -bounciness;
+
+				//if (side == 3) LateAddChild(new Sparks(_position.x, _position.y, 180));
+				//else if (side == 4) LateAddChild(new Sparks(_position.x, _position.y, 0));
 			}
 		}
-
 		else if (other != null)
 		{
 			Vec2 relPos = _oldPosition - other.position;
@@ -461,6 +482,8 @@ public class Block : EasyDraw
 			{
 				_position = _oldPosition + firstTOI * velocity;
 				other._position = other._oldPosition + firstTOI * other.velocity;
+				//if (side == 1) LateAddChild(new Sparks(_position.x, _position.y, 90));
+				//else if (side == 2) LateAddChild(new Sparks(_position.x, _position.y, 270));
 
 				float CenterOfMass = ((this.velocity.x * this.Mass + other.velocity.x * other.Mass) / (this.Mass + firstColBlock.Mass));
 				velocity.x = CenterOfMass - bounciness * (velocity.x - CenterOfMass);
@@ -471,6 +494,9 @@ public class Block : EasyDraw
 			{
 				_position = _oldPosition + firstTOI * velocity;
 				firstColBlock._position = firstColBlock._oldPosition + firstTOI * firstColBlock.velocity;
+
+				//if (side == 3) LateAddChild(new Sparks(_position.x, _position.y, 180));
+				//else if (side == 4) LateAddChild(new Sparks(_position.x, _position.y, 0));
 
 				float CenterOfMass = ((this.velocity.y * this.Mass + firstColBlock.velocity.y * firstColBlock.Mass) / (this.Mass + firstColBlock.Mass));
 				velocity.y = CenterOfMass - bounciness * (velocity.y - CenterOfMass);
@@ -516,8 +542,6 @@ public class Block : EasyDraw
 		y = _position.y;
 	}
 
-	
-
 	void Draw()
 	{
 		Fill(200);
@@ -525,4 +549,26 @@ public class Block : EasyDraw
 		ShapeAlign(CenterMode.Min, CenterMode.Min);
 		Rect(0, 0, width, height);
 	}
+
+	bool slow = false;
+
+	void OnCollision(GameObject other)
+    {
+		if (other is Crate)
+        {
+			Console.WriteLine(lives.ToString());
+
+			if (slow == false)
+            {
+				velocity.x /= 2;
+				velocity.y /= 2;
+
+				slow = true;
+			}
+
+			lives--;
+
+			wasInCrateLastFrame = true;
+		}
+    }
 }
