@@ -7,7 +7,7 @@ namespace GXPEngine
         readonly MyGame myGame = MyGame.current;
         readonly LevelManager levelManager = LevelManager.current;
 
-        Sound gunshot = new Sound("gunshot without the gun noises.mp3");
+        Sound gunshot;
         int shotDelaySetup = 10;
         int shotDelay;
         bool hasShot = false;
@@ -23,6 +23,15 @@ namespace GXPEngine
         void Update()
         {
             TurnTowardsMouse();
+
+            if(myGame.soundOn == true)
+            {
+                gunshot = new Sound("gunshot without the gun noises.mp3");
+            } else
+            {
+                gunshot = new Sound("");
+            }
+            
 
             if (Input.GetKeyDown(Key.SPACE) && levelManager.ammo > 0)
             {

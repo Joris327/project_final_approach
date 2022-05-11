@@ -9,7 +9,8 @@ namespace GXPEngine
 {
     public class Enemy : AnimationSprite
     {
-        Sound explosion = new Sound("explosion.mp3");
+        MyGame myGame = MyGame.current;
+        Sound explosion;
 
         public Enemy(float pX, float pY) : base("spritesheet_robot.png", 4, 2)
         {
@@ -23,6 +24,13 @@ namespace GXPEngine
 
         void Update()
         {
+            if(myGame.soundOn == true)
+            {
+                explosion = new Sound("explosion.mp3");
+            } else
+            {
+                explosion = new Sound("");
+            }
             Animate(0.1f);
         }
 

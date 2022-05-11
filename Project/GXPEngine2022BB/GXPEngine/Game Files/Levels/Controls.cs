@@ -10,17 +10,27 @@ namespace GXPEngine
         Button returnButton;
         Button soundButton;
         Button musicButton;
-        public Boolean soundOn;
-        public Boolean musicOn;
+        
 
         public Controls() : base("controls_background.png", false, false)
         {
+            Console.WriteLine("Sound on = " + myGame.soundOn);
             returnButton = new Button(1150, 650, "square.png");
-            soundButton = new Button(808, 531, "colors.png");
-            LateAddChild(soundButton);
+            
             musicButton = new Button(808, 610, "colors.png");
             LateAddChild(musicButton);
             LateAddChild(returnButton);
+
+            if (myGame.soundOn == true)
+            {
+                soundButton = new Button(808, 531, "colors.png");
+                LateAddChild(soundButton);
+            }
+            else if (myGame.soundOn == false)
+            {
+                soundButton = new Button(808, 531, "checkers.png");
+                LateAddChild(soundButton);
+            }
 
 
         }
@@ -28,31 +38,37 @@ namespace GXPEngine
         void Update()
         {
 
+            Boolean sButtonPressed = soundButton.CheckIfPressed();
+
             if (returnButton.CheckIfPressed() == true)
             {
                 levelManager.LoadMainMenu();
             }
 
-            if (soundButton.CheckIfPressed() == true)
+            if (sButtonPressed && soundButton.bSprite == "colors.png")
             {
-                if (soundButton.bSprite == "colors.png")
-                {
-                    soundButton.Remove();
-                    soundButton = new Button(808, 531, "checkers.png");
-                    LateAddChild(soundButton);
-                    soundOn = false;
-                    Console.WriteLine(soundButton.CheckIfPressed());
-                }
-
-                //if (soundButton.bSprite == "checkers.png")
-                //{
-                //    Console.WriteLine(soundButton.CheckIfPressed());
-                //    soundButton.Remove();
-                //    soundButton = new Button(808, 531, "colors.png");
-                //    LateAddChild(soundButton);
-                //    soundOn = true;
-                //}
+                soundButton.Remove();
+                soundButton = new Button(808, 531, "checkers.png");
+                LateAddChild(soundButton);
+                myGame.soundOn = false;
+                sButtonPressed = false;
+                Console.WriteLine("Sound on = " + myGame.soundOn);
+                //System.Threading.Thread.Sleep(1000);
             }
+
+            if (sButtonPressed == true && soundButton.bSprite == "checkers.png")
+            {
+                
+                soundButton.Remove();
+                soundButton = new Button(808, 531, "colors.png");
+                LateAddChild(soundButton);
+                myGame.soundOn = true;
+                sButtonPressed = false;
+                Console.WriteLine("Sound on = " + myGame.soundOn);
+                //System.Threading.Thread.Sleep(1000);
+            }
+
+            
         }
     }
 }

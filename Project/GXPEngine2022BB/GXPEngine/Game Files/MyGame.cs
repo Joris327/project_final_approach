@@ -13,6 +13,7 @@ public class MyGame : Game
 	public float RightXBoundary;
 	public float TopYBoundary;
 	public float BottomYBoundary;
+	public Boolean soundOn = true;
 
 	static void Main()
 	{
