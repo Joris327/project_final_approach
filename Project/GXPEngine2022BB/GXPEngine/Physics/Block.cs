@@ -53,7 +53,7 @@ public class Block : EasyDraw
 
 	LevelManager levelManager = LevelManager.current;
 
-	Canvas _lineContainer = null;
+	//Canvas _lineContainer = null;
 
 	int _bounces = 10;
 
@@ -66,8 +66,6 @@ public class Block : EasyDraw
 	public float angle;
 
 	int lives = 2;
-
-	bool wasInCrateLastFrame = false;
 
 	public Block(float pradius, Vec2 pPosition, Vec2 pVelocity, bool pcanCollide=true, bool pVisible=true, int density=1) : base((int)pradius * 2, (int)pradius * 2)
 	{
@@ -85,8 +83,8 @@ public class Block : EasyDraw
 		//bounciness = 1.0f;
 		acceleration = new Vec2(0, (100f * 9.81f) / Mass);
 
-		_lineContainer = new Canvas(myGame.width, myGame.height, false);
-		levelManager.AddChild(_lineContainer);
+		levelManager._lineContainer = new Canvas(myGame.width, myGame.height, false);
+		levelManager.AddChild(levelManager._lineContainer);
 
 		_density = density;
 	}
@@ -126,8 +124,6 @@ public class Block : EasyDraw
 		if (lives <= 0) SelfDestruct();
 
 		CheckOffscreen();
-
-		wasInCrateLastFrame = false;
 	}
 
 	void SelfDestruct()
@@ -344,9 +340,9 @@ public class Block : EasyDraw
 						float TOI = POI(impact, false);
 						if (Input.GetKey(Key.Z))
 						{
-							Console.WriteLine(impact);
-							Console.WriteLine(position.x);
-							Console.WriteLine(_oldPosition.x);
+							//Console.WriteLine(impact);
+							//Console.WriteLine(position.x);
+							//Console.WriteLine(_oldPosition.x);
 						}
 						if (TOI >= 0 && TOI < firstTOI)
 						{
@@ -416,7 +412,7 @@ public class Block : EasyDraw
 					other.SetFadeColor(0.2f, 0.2f, 1);
 					if (wordy)
 					{
-						Console.WriteLine("Block-block overlap detected.");
+						//Console.WriteLine("Block-block overlap detected.");
 					}
 
 					ricochet.Play();
@@ -525,7 +521,7 @@ public class Block : EasyDraw
 
 	public void DrawLine(Vec2 start, Vec2 end)
 	{
-		_lineContainer.graphics.DrawLine(Pens.White, start.x, start.y, end.x, end.y);
+		levelManager._lineContainer.graphics.DrawLine(Pens.White, start.x, start.y, end.x, end.y);
 	}
 
 	void ShowDebugInfo()
@@ -551,6 +547,7 @@ public class Block : EasyDraw
 	}
 
 	bool slow = false;
+	public bool isBullet = false;
 
 	void OnCollision(GameObject other)
     {
@@ -566,9 +563,11 @@ public class Block : EasyDraw
 				slow = true;
 			}
 
-			lives--;
-
-			wasInCrateLastFrame = true;
+			if (isBullet == true)
+            {
+				lives--;
+				other.LateDestroy();
+			}
 		}
     }
 }

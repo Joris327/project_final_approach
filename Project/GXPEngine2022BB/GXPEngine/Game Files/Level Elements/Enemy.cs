@@ -9,7 +9,9 @@ namespace GXPEngine
 {
     public class Enemy : AnimationSprite
     {
-        Sound explosion = new Sound("explosion.mp3");
+        MyGame myGame = MyGame.current;
+
+        Sound explosion = new Sound("explsoion.mp3");
 
         public Enemy(float pX, float pY) : base("spritesheet_robot.png", 4, 2)
         {
@@ -32,6 +34,7 @@ namespace GXPEngine
             {
                 //Console.WriteLine("Hit");
                 explosion.Play(false, 0, 0.75f);
+                myGame.LateAddChild(new EnemyExplosion(x, y));
                 this.LateDestroy();
             }
         }

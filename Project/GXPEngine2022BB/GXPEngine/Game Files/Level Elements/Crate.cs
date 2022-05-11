@@ -25,7 +25,6 @@ namespace GXPEngine
             {
                 //Animate();
                 //if (currentFrame == ?) LateDestroy();
-                Destroy();
             }
         }
 

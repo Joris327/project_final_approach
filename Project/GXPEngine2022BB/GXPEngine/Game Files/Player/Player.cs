@@ -10,7 +10,8 @@ namespace GXPEngine
             SetOrigin(width / 2 - 90, height / 2 - 60);
             SetXY(pX, pY);
             SetScaleXY(0.4f, 0.4f);
-            LateAddChild(new AimLine(0, 0));
+            LateAddChild(new PlayerArm(0, 0));
+            LateAddChild(new Aimline(0, 0));
         }
     }
 }
