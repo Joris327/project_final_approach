@@ -29,8 +29,6 @@ namespace GXPEngine
             AddChild(new Platform(805, 275));
 
             AddChild(new Enemy(885, 550));
-            //AddChild(new Crate(800, 574));
-            //AddChild(new Platform(785, 625));
             AddChild(new Platform(895, 625));
 
             AddChild(new Enemy(1100, 400));

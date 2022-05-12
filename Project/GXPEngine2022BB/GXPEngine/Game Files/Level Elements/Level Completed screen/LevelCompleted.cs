@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace GXPEngine
 {
@@ -21,6 +17,12 @@ namespace GXPEngine
 
         readonly int starsWon;
 
+        
+
+        readonly Font cowboyFont = new Font(FontFamily.GenericSerif, 20, FontStyle.Regular);
+
+        readonly Canvas scoreUI = new Canvas(300, 300, false);
+
         public LevelCompleted(int pstarsWon) : base("Level_Completed.png", false, false)
         {
             starsWon = pstarsWon;
@@ -28,9 +30,9 @@ namespace GXPEngine
             SetOrigin(width / 2, height / 2);
             SetXY(myGame.width / 2, myGame.height / 2);
 
-            star1 = new StarAnim(309-x, 188-y);
-            star2 = new StarAnim(509-x, 62-y);
-            star3 = new StarAnim(707-x, 189-y);
+            star1 = new StarAnim(304-x, 199-y);
+            star2 = new StarAnim(503-x, 74-y);
+            star3 = new StarAnim(702-x, 199-y);
 
             SetupButtons();
 
@@ -49,6 +51,13 @@ namespace GXPEngine
                 AddChild(star3);
                 star3.visible = false;
             }
+
+            if (myGame.musicOn) levelManager.winchannel = levelManager.winmusic.Play();
+            if (myGame.channelLevel != null) myGame.channelLevel.IsPaused = true;
+
+            AddChild(scoreUI);
+            SetOrigin(width / 2, height / 2);
+            scoreUI.SetXY(-90, -100);
         }
 
         void SetupButtons()
@@ -58,8 +67,8 @@ namespace GXPEngine
             //mainMenuButton = new Button(myGame.width/2-150, myGame.height / 2 + 200, "XStyleSheet.png", true, 2, 1);
 
             redoButton = new Button(0, 200, "RedoSpriteSheet.png", true, 2, 1);
-            nextLevelButton = new Button(150, 200, "NextLevelSpriteSheet.png", true, 2, 1);
-            mainMenuButton = new Button(-150, 200, "XStyleSheet.png", true, 2, 1);
+            nextLevelButton = new Button(200, 200, "NextLevelSpriteSheet.png", true, 2, 1);
+            mainMenuButton = new Button(-200, 200, "XStyleSheet.png", true, 2, 1);
 
             AddChild(redoButton);
             AddChild(nextLevelButton);
@@ -71,6 +80,9 @@ namespace GXPEngine
             AnimateStars();
 
             UpdateButtons();
+
+            scoreUI.graphics.Clear(Color.Empty);
+            scoreUI.graphics.DrawString("Score: " + levelManager.score.ToString(), cowboyFont, Brushes.Black, 30, 110);
         }
 
         void UpdateButtons()
@@ -84,18 +96,40 @@ namespace GXPEngine
 
             if (mainMenuButton.CheckIfHovered() == true) mainMenuButton.SetCycle(1);
             else mainMenuButton.SetCycle(0);
-            
+
             if (mainMenuButton.CheckIfPressed() == true)
             {
-                myGame.gameStarted = false;
+                levelManager.winchannel.Stop();
                 levelManager.LoadMainMenu();
             }
-            else if (redoButton.CheckIfPressed() == true) levelManager.LoadLevel(levelManager.currentLevel);
+            else if (redoButton.CheckIfPressed() == true)
+            {
+                if (levelManager.levelComplete)
+                {
+                    levelManager.score -= 100 * levelManager.ammo;
+                    levelManager.score -= levelManager.hwallsamount * 50;
+                    levelManager.score -= levelManager.vwallsamount * 50;
+                }
+
+                levelManager.winchannel.Stop();
+                levelManager.LoadLevel(levelManager.currentLevel);
+                myGame.channelLevel.IsPaused = false;
+            }
 
             if (nextLevelButton.CheckIfPressed() == true)
             {
-                if (levelManager.currentLevel < 10) levelManager.LoadLevel(levelManager.currentLevel + 1);
-                else levelManager.LoadMainMenu();
+                if (levelManager.currentLevel < 10)
+                {
+                    levelManager.winchannel.Stop();
+                    levelManager.LoadLevel(levelManager.currentLevel + 1);
+                    myGame.channelLevel.IsPaused = false;
+                }
+                else
+                {
+                    levelManager.winchannel.Stop();
+                    levelManager.LoadMainMenu();
+                    myGame.channelLevel.IsPaused = false;
+                }
             }
         }
 

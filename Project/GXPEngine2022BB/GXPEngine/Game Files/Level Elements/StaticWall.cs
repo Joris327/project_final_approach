@@ -10,13 +10,13 @@ namespace GXPEngine
     {
         readonly MyGame myGame = MyGame.current;
 
-        public StaticWall(float pX, float pY, Vec2 pScale, int protation=0) : base("WallTexture.png")
+        public StaticWall(float pX, float pY, Vec2 pScale, int protation=0, bool addRigidBody=true) : base("WallTexture.png")
         {
             SetOrigin(width / 2, height / 2);
             SetXY(pX, pY);
             SetScaleXY(pScale.x, pScale.y);
             rotation = protation;
-            AddRigidbody();
+            if(addRigidBody)AddRigidbody();
         }
 
         void AddRigidbody()

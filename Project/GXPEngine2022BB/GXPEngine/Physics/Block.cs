@@ -67,8 +67,6 @@ public class Block : EasyDraw
 
 	int lives = 2;
 
-	readonly CrateDestruction crateDestruction = null;
-
 	Sound crateSound = new Sound("wood hit crunchymunchy.mp3");
 
 	public Block(float pradius, Vec2 pPosition, Vec2 pVelocity, bool pcanCollide=true, bool pVisible=true, int density=1) : base((int)pradius * 2, (int)pradius * 2)
@@ -91,8 +89,6 @@ public class Block : EasyDraw
 		levelManager.AddChild(levelManager._lineContainer);
 
 		_density = density;
-
-		crateDestruction = new CrateDestruction(x, y);
 	}
 
 	bool graf = false;
@@ -574,14 +570,9 @@ public class Block : EasyDraw
 			{
 				lives--;
 
-				if (crateDestruction != null)
-                {
-					levelManager.LateAddChild(crateDestruction);
-					crateDestruction.x = other.x;
-					crateDestruction.y = other.y;
-				}
+				levelManager.LateAddChild(new CrateDestruction(other.x, other.y));
 
-				crateSound.Play();
+				if(myGame.soundOn) crateSound.Play();
 				other.LateDestroy();
 			}
 		}

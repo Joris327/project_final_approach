@@ -10,12 +10,22 @@ namespace GXPEngine
     {
         readonly MyGame myGame = MyGame.current;
 
-        public Platform(float pX, float pY) : base("platform10.png")
+        AnimationSprite fire = new AnimationSprite("fire_platform.png", 6, 1, -1, false, false);
+
+        public Platform(float pX, float pY, bool Fire = true) : base("platform10.png")
         {
             SetOrigin(width / 2, height / 2);
             SetXY(pX, pY);
 
             AddRigidbody();
+            if (Fire) AddChild(fire);
+            fire.x = -12;
+            fire.y = 12;
+        }
+
+        void Update()
+        {
+            fire.Animate(0.2f);
         }
 
         void AddRigidbody()

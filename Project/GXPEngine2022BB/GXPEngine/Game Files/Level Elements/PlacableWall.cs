@@ -9,6 +9,7 @@ namespace GXPEngine
     public class PlacableWall : Sprite
     {
         readonly MyGame myGame = MyGame.current;
+        readonly LevelManager levelManager = LevelManager.current;
         readonly LevelUI levelUI;
 
         bool followMouse = true;
@@ -60,6 +61,8 @@ namespace GXPEngine
 
         void CheckReturnToInventory()
         {
+            if (levelManager.levelComplete) return;
+
             int mouseX = Input.mouseX;
             int mouseY = Input.mouseY;
             bool mouseOverlaps = false;

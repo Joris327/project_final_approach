@@ -35,6 +35,15 @@ namespace GXPEngine
                     if (levelUI.holdingObject == false) Shoot();
                 }
             }
+
+            if (Input.GetMouseButtonDown(1) && levelManager.ammo > 0 && levelManager.levelComplete == false && levelManager.holding == false)
+            {
+                if (levelUI == null) Shoot();
+                else if (levelUI != null)
+                {
+                    if (levelUI.holdingObject == false) Shoot();
+                }
+            }
         }
 
         void TurnTowardsMouse()

@@ -28,6 +28,8 @@ namespace GXPEngine
         PlacableWall wallh;
         PlacableWall wallv;
 
+        readonly Font cowboyFont = new Font(FontFamily.GenericSerif, 20, FontStyle.Regular);
+
         public LevelUI(int pVWallsAmount, int pHWallsAmount) : base(1280, 720, false)
         {
             vWallsAmount = pVWallsAmount;
@@ -38,9 +40,11 @@ namespace GXPEngine
             inventorySlot1 = new InventoryBar(myGame.width / 2 - 52.5f, myGame.height - 50);
             inventorySlot2 = new InventoryBar(myGame.width / 2 + 52.5f, myGame.height - 50);
 
-            WallIconV = new StaticWall(myGame.width / 2 - 52.5f, myGame.height - 50, new Vec2(0.25f, 0.25f));
-            WallIconH = new StaticWall(myGame.width / 2 + 52.5f, myGame.height - 50, new Vec2(0.25f, 0.25f), 90);
+            WallIconV = new StaticWall(myGame.width / 2 - 52.5f, myGame.height - 50, new Vec2(0.25f, 0.25f), 0, false);
+            WallIconH = new StaticWall(myGame.width / 2 + 52.5f, myGame.height - 50, new Vec2(0.25f, 0.25f), 90, false);
         }
+
+        bool once = false;
 
         void Update()
         {
@@ -51,8 +55,19 @@ namespace GXPEngine
 
             if (Input.GetKey(Key.TAB)) DrawMouseCoords();
 
-            DrawInvantory();
+            if (levelManager.levelComplete == false) graphics.DrawString("Score: " + levelManager.score.ToString(), cowboyFont, Brushes.Black, 30, 110);
+
+            DrawInventory();
             InventoryFunctionality();
+
+            if (once == false && levelManager.levelComplete)
+            {
+                once = true;
+                levelManager.score += 50 * hWallsAmount;
+                levelManager.score += 50 * vWallsAmount;
+            }
+
+            levelManager.holding = holdingObject;
         }
 
         void InventoryFunctionality()
@@ -85,7 +100,7 @@ namespace GXPEngine
             }
         }
 
-        void DrawInvantory()
+        void DrawInventory()
         {
             DrawSprite(inventorySlot1);
             DrawSprite(inventorySlot2);
@@ -95,6 +110,9 @@ namespace GXPEngine
 
             graphics.DrawString(vWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Black, width / 2 - 20, height - 20);
             graphics.DrawString(hWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Black, width / 2 + 85, height - 20);
+
+            levelManager.hwallsamount = hWallsAmount;
+            levelManager.vwallsamount = vWallsAmount;
         }
 
         void DrawMouseCoords()
