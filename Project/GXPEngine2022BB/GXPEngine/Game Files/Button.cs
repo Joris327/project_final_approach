@@ -30,5 +30,19 @@ namespace GXPEngine
             }
             else return false;
         }
+
+        public bool CheckIfHovered()
+        {
+            float mouseX = Input.mouseX;
+            float mouseY = Input.mouseY;
+            float radiusX = width / 2;
+            float radiusY = height / 2;
+
+            if (mouseX < x + radiusX && mouseX > x - radiusX &&
+                mouseY < y + radiusY && mouseY > y - radiusY) {
+                return true;
+
+            } else return false;
+        }
     }
 }

@@ -20,13 +20,23 @@ public class MainMenu : Sprite
         LateAddChild(controlsButton);
         LateAddChild(exitButton);
         LateAddChild(startButton);
+      
+        
+
+
+
     }
 
     void Update()
     {
+
+      
+
         if (startButton.CheckIfPressed() == true)
         {
+            //music.Stop();
             levelManager.LoadLevel(1);
+            
         }
 
         if(exitButton.CheckIfPressed() == true)
@@ -37,8 +47,15 @@ public class MainMenu : Sprite
         if (controlsButton.CheckIfPressed() == true)
         {
             levelManager.LoadControls();
+            if (myGame.musicOn == false)
+            {
+                //music.Stop();
+            }
+
         }
 
         
+
+
     }
 }

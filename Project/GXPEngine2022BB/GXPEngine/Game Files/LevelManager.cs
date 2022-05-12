@@ -13,6 +13,8 @@ namespace GXPEngine
         Button reloadButton;
         Button nextLevelButton;
 
+        public bool mainMenu = true;
+
         int currentLevel = 0;
 
         public int ammo = 3;
@@ -28,6 +30,7 @@ namespace GXPEngine
         {
             if (mainMenuButton != null && mainMenuButton.CheckIfPressed() == true)
             {
+                myGame.gameStarted = false;
                 LoadMainMenu();
             }
 
@@ -75,19 +78,23 @@ namespace GXPEngine
 
         public void LoadLevel(int index)
         {
+            mainMenu = false;
             RemoveAllLevels();
 
             currentLevel = index;
 
             ammo = 3;
 
-            bool mainMenu = false;
+            
 
             switch (index)
             {
                 case 1:
+                    myGame.gameStarted = true;
                     AddChild(new Level1());
                     AddChild(new LevelUI(0, 0));
+                    myGame.mainMusicPlaying = false;
+                    
                     break;
                 case 2:
                     AddChild(new Level2());
@@ -98,8 +105,10 @@ namespace GXPEngine
                     AddChild(new LevelUI(0, 1));
                     break;
                 default:
+                    
                     LoadMainMenu();
                     mainMenu = true;
+                    
                     break;
             }
 

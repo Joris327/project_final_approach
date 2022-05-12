@@ -15,6 +15,13 @@ public class MyGame : Game
 	public float BottomYBoundary;
 	public Boolean soundOn = true;
 	public Boolean musicOn = true;
+	public Boolean mainMusicPlaying = false;
+	
+	LevelManager levelManager;
+	public SoundChannel channel;
+	public Boolean gameStarted = false;
+
+	LevelManager c;
 
 	static void Main()
 	{
@@ -31,12 +38,49 @@ public class MyGame : Game
 		TopYBoundary = 64;
 		BottomYBoundary = height - 64;
 
-		LateAddChild(new LevelManager());
+		
+		levelManager = new LevelManager();
+		LateAddChild(levelManager);
+
+		
+
+
 	}
 
 	void Update()
-    {
+	{
+		Sound menuMusic = new Sound("mainmenu_music.mp3", true);
+		
+		if(musicOn)
+        {
+			if (!mainMusicPlaying && !gameStarted)
+			{
+				channel = menuMusic.Play();
+				mainMusicPlaying = true;
+			}
+
+			if (gameStarted)
+			{
+				channel.Stop();
+				mainMusicPlaying = false;
+			}
+		}
+
+		if(!musicOn)
+        {
+			channel.Mute = true;
+        } else
+        {
+			channel.Mute = false;
+        }
+
+
+		
+		
+
+
 		StepThroughMovers();
+		
 	}
 
 	void StepThroughMovers()
