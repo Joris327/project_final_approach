@@ -9,17 +9,20 @@ public class MainMenu : Sprite
     Button startButton;
     Button optionsButton;
     Button controlsButton;
+    Button storyButton;
     Button exitButton;
 
     public MainMenu() : base("checkers.png")
     {
         startButton = new Button(myGame.width/2, myGame.height/2, "square.png");
         controlsButton = new Button(myGame.width / 2, myGame.height / 2 + 64, "square.png");
-        exitButton = new Button(myGame.width / 2, myGame.height / 2 + 128, "square.png");
+        storyButton = new Button(myGame.width / 2, myGame.height / 2 + 128, "square.png");
+        exitButton = new Button(myGame.width / 2, myGame.height / 2 + 192, "square.png");
 
         LateAddChild(controlsButton);
         LateAddChild(exitButton);
         LateAddChild(startButton);
+        LateAddChild(storyButton);
       
         
 
@@ -37,6 +40,11 @@ public class MainMenu : Sprite
             //music.Stop();
             levelManager.LoadLevel(1);
             
+        }
+
+        if(storyButton.CheckIfPressed() == true)
+        {
+            levelManager.LoadStory();
         }
 
         if(exitButton.CheckIfPressed() == true)

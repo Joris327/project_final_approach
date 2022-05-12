@@ -48,6 +48,7 @@
     <Compile Include="Game Files\Levels\Level2.cs" />
     <Compile Include="Game Files\Levels\Level3.cs" />
     <Compile Include="Game Files\Levels\Options.cs" />
+    <Compile Include="Game Files\Levels\Story.cs" />
     <Compile Include="Game Files\Player\AimLine.cs" />
     <Compile Include="Game Files\Player\Bullet.cs" />
     <Compile Include="Game Files\Player\Player.cs" />

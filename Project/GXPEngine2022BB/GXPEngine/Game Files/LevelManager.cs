@@ -61,11 +61,11 @@ namespace GXPEngine
             LateAddChild(controls);
         }
 
-        public void LoadOptions()
+        public void LoadStory()
         {
             RemoveAllLevels();
-            Options options = new Options();
-            LateAddChild(options);
+            Story story = new Story();
+            LateAddChild(story);
         }
 
         public void LoadMainMenu()
