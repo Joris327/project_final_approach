@@ -19,6 +19,8 @@ namespace GXPEngine
         bool obstructed = false;
         bool obstructedlastFrame = false;
 
+        Sound placeWall = new Sound("place metal wall.mp3");
+
         public PlacableWall(float pX, float pY, int pRotation, LevelUI pGameUI) : base("WallTexture.png", false, true)
         {
             SetOrigin(width / 2, height / 2);
@@ -38,9 +40,13 @@ namespace GXPEngine
                 if (CheckIfObstructed() == false && Input.GetMouseButtonDown(0))
                 {
                     followMouse = false;
+                    placeWall.Play();
                     levelUI.holdingObject = false;
-                    //BlockA.canCollide = true;
-                    //BlockB.canCollide = true;
+                }
+                else if (Input.GetMouseButtonDown(1))
+                {
+                    ReturnToInventory();
+                    levelUI.holdingObject = false;
                 }
             }
             else
@@ -135,14 +141,14 @@ namespace GXPEngine
             if (rotation == 0)
             {
                 SetXY(Input.mouseX, Input.mouseY);
-                BlockA._position = new Vec2(x + 1, y - 37.5f);
-                BlockB._position = new Vec2(x + 1, y + 39.5f);
+                BlockA._position = new Vec2(x + 1, y - 39);
+                BlockB._position = new Vec2(x + 1, y + 39);
             }
             else if (rotation == 90)
             {
                 SetXY(Input.mouseX, Input.mouseY);
-                BlockA._position = new Vec2(x - 38.5f, y);
-                BlockB._position = new Vec2(x + 39f, y);
+                BlockA._position = new Vec2(x - 39, y);
+                BlockB._position = new Vec2(x + 39, y);
             }
 
             if (Input.GetKeyDown(Key.BACKSPACE))
@@ -165,8 +171,23 @@ namespace GXPEngine
 
         void ReturnToInventory()
         {
-            if (rotation == 0) levelUI.hWallsAmount++;
-            else if (rotation == 90) levelUI.vWallsAmount++;
+            if (rotation == 0) levelUI.vWallsAmount++;
+            else if (rotation == 90) levelUI.hWallsAmount++;
+
+            BlockA.LateDestroy();
+            BlockB.LateDestroy();
+
+            int indexA = -1;
+            int indexB = -1;
+
+            foreach(Block b in myGame._movers)
+            {
+                if (b == BlockA) indexA = myGame._movers.IndexOf(b);
+                else if (b == BlockB) indexB = myGame._movers.IndexOf(b);
+            }
+
+            if (indexA != -1) myGame._movers.RemoveAt(indexA);
+            if (indexB!= -1) myGame._movers.RemoveAt(indexB-1);
 
             LateDestroy();
         }
@@ -175,7 +196,7 @@ namespace GXPEngine
         {
             Console.WriteLine("collided");
 
-            if (other is PlacableWall || other is StaticWall || other is Enemy || other is Player || other is AimLine)
+            if (other is PlacableWall || other is StaticWall || other is Enemy || other is Player || other is PlayerArm || other is Crate || other is Platform)
             {
                 obstructed = true;
                 obstructedlastFrame = true;

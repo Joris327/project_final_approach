@@ -5,14 +5,20 @@ namespace GXPEngine
 {
     public class Level1 : Sprite
     {
-        public Level1() : base("colors.png", false, false)
+        readonly MyGame myGame = MyGame.current;
+        readonly LevelManager levelManager = LevelManager.current;
+
+        public Level1() : base("BQK.png", false, false)
         {
-            LateAddChild(new Player(200, 600));
-            LateAddChild(new Enemy(600, 489));
-            LateAddChild(new Enemy(400, 189));
-            LateAddChild(new StaticWall(600, 550, 90));
-            LateAddChild(new StaticWall(400, 250, 90));
-            LateAddChild(new StaticWall(1000, 500));
+            myGame.LeftXBoundary = -64;
+            myGame.RightXBoundary = width + 64;
+            myGame.TopYBoundary = -64;
+            myGame.BottomYBoundary = height + 64;
+
+            LateAddChild(new Player(150, 500));
+
+            LateAddChild(new Enemy(700, 500));
+            LateAddChild(new Platform(705, 575));
         }
     }
 }

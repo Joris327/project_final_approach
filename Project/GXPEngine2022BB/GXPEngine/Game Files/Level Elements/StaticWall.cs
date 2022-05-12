@@ -20,8 +20,8 @@ namespace GXPEngine
 
         void AddRigidbody()
         {
-            Block block1 = new Block(37.5f, new Vec2(x+1, y - 38), new Vec2(), false, false, 999);
-            Block block2 = new Block(37.5f, new Vec2(x+1, y + 39), new Vec2(), false, false, 999);
+            Block block1 = new Block(37.5f, new Vec2(x+1, y - 36), new Vec2(), false, false, 999);
+            Block block2 = new Block(37.5f, new Vec2(x+1, y + 37), new Vec2(), false, false, 999);
 
             if (rotation == 90)
             {

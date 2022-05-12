@@ -20,10 +20,12 @@ namespace GXPEngine
 
         public bool holdingObject = false;
 
-        public LevelUI(int pHWallsAmount, int pVWallsAmount) : base(1280, 720, false)
+        public LevelUI(int pVWallsAmount, int pHWallsAmount) : base(1280, 720, false)
         {
-            hWallsAmount = pHWallsAmount;
             vWallsAmount = pVWallsAmount;
+            hWallsAmount = pHWallsAmount;
+
+            AddChild(new AmmoDisplay());
         }
 
         void Update()
@@ -48,20 +50,20 @@ namespace GXPEngine
             {
                 if (mouseX < width / 2 - 80 &&
                     mouseX > width / 2 - 150 &&
-                    hWallsAmount > 0)
+                    vWallsAmount > 0)
                 {
                     PlacableWall wallh = new PlacableWall(mouseX, mouseY, 0, this);
                     levelManager.LateAddChild(wallh);
-                    --hWallsAmount;
+                    --vWallsAmount;
                     holdingObject = true;
                 }
                 else if (mouseX < width / 2 - 10 &&
                          mouseX > width / 2 - 80 &&
-                         vWallsAmount > 0)
+                         hWallsAmount > 0)
                 {
                     PlacableWall wallv = new PlacableWall(mouseX, mouseY, 90, this);
                     levelManager.LateAddChild(wallv);
-                    --vWallsAmount;
+                    --hWallsAmount;
                     holdingObject = true;
                 }
             }
@@ -71,8 +73,8 @@ namespace GXPEngine
         {
             DrawSprite(new InventoryBar(myGame.width / 2, myGame.height - 32));
 
-            graphics.DrawString(hWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Blue, width / 2 - 105, height - 32);
-            graphics.DrawString(vWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Blue, width / 2 - 35, height - 32);
+            graphics.DrawString(vWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Blue, width / 2 - 105, height - 32);
+            graphics.DrawString(hWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Blue, width / 2 - 35, height - 32);
         }
 
         void DrawMouseCoords()

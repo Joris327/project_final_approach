@@ -9,12 +9,23 @@ namespace GXPEngine
 {
     public class Enemy : AnimationSprite
     {
-        public Enemy(float pX, float pY) : base("barry.png", 7, 1)
+        MyGame myGame = MyGame.current;
+
+        Sound explosion = new Sound("explsoion.mp3");
+
+        public Enemy(float pX, float pY) : base("spritesheet_robot.png", 4, 2)
         {
             SetOrigin(width / 2, height / 2);
             SetXY(pX, pY);
-            SetFrame(7);
+            SetScaleXY(0.3f, 0.3f);
+            SetFrame(0);
+            SetCycle(0, 4);
             this.collider.isTrigger = true;
+        }
+
+        void Update()
+        {
+            Animate(0.1f);
         }
 
         void OnCollision(GameObject other)
@@ -22,6 +33,8 @@ namespace GXPEngine
             if (other is Bullet)
             {
                 //Console.WriteLine("Hit");
+                explosion.Play(false, 0, 0.75f);
+                myGame.LateAddChild(new EnemyExplosion(x, y));
                 this.LateDestroy();
             }
         }
