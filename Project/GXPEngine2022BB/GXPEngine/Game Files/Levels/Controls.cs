@@ -78,6 +78,20 @@ namespace GXPEngine
                 levelManager.LoadMainMenu();
             }
 
+            Boolean rButtonHovered = returnButton.CheckIfHovered();
+
+            if(rButtonHovered == true)
+            {
+                returnButton.Remove();
+                returnButton = new Button(1200, 650, "x_hover.png");
+                LateAddChild(returnButton);
+            } else
+            {
+                returnButton.Remove();
+                returnButton = new Button(1200, 650, "return.png");
+                LateAddChild(returnButton);
+            }
+
             
 
 
