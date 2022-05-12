@@ -143,7 +143,7 @@ namespace GXPEngine
 
                 /// MUSIC BUTTON
                 // TURN OFF
-                if (mButtonPressed && musicButton.bSprite == "music_on.png")
+                if (mButtonPressed && myGame.musicOn == true)
             {
                 musicButton.Remove();
                 musicButton = new Button(808, 165, "music_off.png");
@@ -156,7 +156,7 @@ namespace GXPEngine
             }
 
             // TURN ON
-            if (mButtonPressed == true && musicButton.bSprite == "music_off.png")
+            if (mButtonPressed == true && myGame.musicOn == false)
             {
 
                 musicButton.Remove();
@@ -167,6 +167,39 @@ namespace GXPEngine
                 mButtonPressed = false;
                 Console.WriteLine("Music on = " + myGame.musicOn);
                 //System.Threading.Thread.Sleep(1000);
+            }
+
+            if (mButtonHovered && myGame.musicOn == true)
+            {
+                musicButton.Remove();
+                musicButton = new Button(808, 165, "music_hover.png");
+                musicButton.SetScaleXY(buttonScale, buttonScale);
+                LateAddChild(musicButton);
+            }
+            else
+            {
+                if (myGame.musicOn == true)
+                {
+                    musicButton.Remove();
+                    musicButton = new Button(808, 165, "music_on.png");
+                    musicButton.SetScaleXY(buttonScale, buttonScale);
+                    LateAddChild(musicButton);
+                }
+                else
+                {
+                    musicButton.Remove();
+                    musicButton = new Button(808, 165, "music_off.png");
+                    musicButton.SetScaleXY(buttonScale, buttonScale);
+                    LateAddChild(musicButton);
+                }
+            }
+
+            if (mButtonHovered && myGame.musicOn != true)
+            {
+                musicButton.Remove();
+                musicButton = new Button(808, 165, "music_off_hover.png");
+                musicButton.SetScaleXY(buttonScale, buttonScale);
+                LateAddChild(musicButton);
             }
         }
     }

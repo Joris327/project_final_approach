@@ -16,9 +16,11 @@ public class MyGame : Game
 	public Boolean soundOn = true;
 	public Boolean musicOn = true;
 	public Boolean mainMusicPlaying = false;
+	public Boolean bMusicPlaying = false;
 	
 	LevelManager levelManager;
 	public SoundChannel channel;
+	public SoundChannel channelLevel;
 	public Boolean gameStarted = false;
 
 	LevelManager c;
@@ -50,6 +52,7 @@ public class MyGame : Game
 	void Update()
 	{
 		Sound menuMusic = new Sound("mainmenu_music.mp3", true);
+		Sound levelMusic = new Sound("b_music.mp3", true);
 		
 		if(musicOn)
         {
@@ -63,7 +66,23 @@ public class MyGame : Game
 			{
 				channel.Stop();
 				mainMusicPlaying = false;
+
+				if(!bMusicPlaying)
+                {
+					channelLevel = levelMusic.Play();
+					bMusicPlaying = true;
+                }
 			}
+
+			if(!gameStarted && channelLevel != null)
+            {
+				channelLevel.Stop();
+				bMusicPlaying=false;
+            }
+
+
+
+			
 		}
 
 		if(!musicOn)
