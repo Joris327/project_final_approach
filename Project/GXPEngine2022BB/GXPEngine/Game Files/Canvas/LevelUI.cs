@@ -57,6 +57,8 @@ namespace GXPEngine
 
         void InventoryFunctionality()
         {
+            if (levelManager.levelComplete == true) return;
+
             if (mouseY < height &&
                 mouseY > height - 100 &&
                 Input.GetMouseButtonDown(0) &&

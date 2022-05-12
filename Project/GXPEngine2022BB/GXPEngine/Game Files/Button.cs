@@ -7,7 +7,7 @@ namespace GXPEngine
     {
         public String bSprite;
 
-        public Button(float pX, float pY, String buttonSprite, bool pVisible=true) : base(buttonSprite, 1, 1, -1, false, false)
+        public Button(float pX, float pY, String buttonSprite, bool pVisible= true, int xrow=1, int yrow=1) : base(buttonSprite, xrow, yrow, -1, false, false)
         {
             SetOrigin(width / 2, height / 2);
             SetXY(pX, pY);
@@ -20,9 +20,17 @@ namespace GXPEngine
             float mouseY = Input.mouseY;
             float radiusX = width / 2;
             float radiusY = height / 2;
+            float parentX = 0;
+            float parentY = 0;
 
-            if (mouseX < x + radiusX && mouseX > x - radiusX &&
-                mouseY < y + radiusY && mouseY > y - radiusY &&
+            if (parent != null)
+            {
+                parentX = parent.x;
+                parentY = parent.y;
+            }
+
+            if (mouseX < x + radiusX + parentX && mouseX > x - radiusX + parentX &&
+                mouseY < y + radiusY + parentY && mouseY > y - radiusY + parentY &&
                 Input.GetMouseButtonDown(0))
             {
                 return true;
@@ -36,12 +44,19 @@ namespace GXPEngine
             float mouseY = Input.mouseY;
             float radiusX = width / 2;
             float radiusY = height / 2;
+            float parentX = 0;
+            float parentY = 0;
 
-            if (mouseX < x + radiusX && mouseX > x - radiusX &&
-                mouseY < y + radiusY && mouseY > y - radiusY)
+            if (parent != null)
+            {
+                parentX = parent.x;
+                parentY = parent.y;
+            }
+
+            if (mouseX < x + radiusX + parentX && mouseX > x - radiusX + parentX &&
+                mouseY < y + radiusY + parentY && mouseY > y - radiusY + parentY)
             {
                 return true;
-
             }
             else return false;
         }

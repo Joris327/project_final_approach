@@ -10,30 +10,25 @@ namespace GXPEngine
     {
         readonly MyGame myGame = MyGame.current;
 
-        bool animate = false;
+        //readonly AnimationSprite crateDestruction;
 
         public Crate(float pX, float pY) : base("crate.png", 1, 1)
         {
             SetOrigin(width / 2, height / 2);
             SetXY(pX, pY);
             SetScaleXY(0.75f, 0.75f);
+
+            //crateDestruction = new CrateDestruction(x, y);
         }
 
-        void Update()
+        public void SpawnAnimation()
         {
-            if (animate)
-            {
-                //Animate();
-                //if (currentFrame == ?) LateDestroy();
-            }
+            //LateAddChild(crateDestruction);
         }
 
         void OnCollision(GameObject other)
         {
-            if (other is Bullet)
-            {
-                animate = true;
-            }
+            if (other is Block) SpawnAnimation();
         }
     }
 }

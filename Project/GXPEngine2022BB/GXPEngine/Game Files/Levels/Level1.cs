@@ -19,6 +19,8 @@ namespace GXPEngine
 
             LateAddChild(new Enemy(700, 500));
             LateAddChild(new Platform(705, 575));
+
+            LateAddChild(new Crate(500, 300));
         }
     }
 }

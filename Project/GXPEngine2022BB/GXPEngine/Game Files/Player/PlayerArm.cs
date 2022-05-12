@@ -18,7 +18,7 @@ namespace GXPEngine
 
         void Update()
         {
-            TurnTowardsMouse();
+            if (levelManager.levelComplete == false) TurnTowardsMouse();
 
             LevelUI levelUI = null;
 
@@ -27,7 +27,7 @@ namespace GXPEngine
                 levelUI = levelui;
             }
 
-            if (Input.GetKeyDown(Key.SPACE) && levelManager.ammo > 0)
+            if (Input.GetKeyDown(Key.SPACE) && levelManager.ammo > 0 && levelManager.levelComplete == false)
             {
                 if (levelUI == null) Shoot();
                 else if (levelUI != null)

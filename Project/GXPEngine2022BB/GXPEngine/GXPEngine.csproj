@@ -42,9 +42,11 @@
   <ItemGroup>
     <Compile Include="Game Files\Canvas\AmmoDisplay.cs" />
     <Compile Include="Game Files\Level Elements\Crate.cs" />
+    <Compile Include="Game Files\Level Elements\CrateDestruction.cs" />
     <Compile Include="Game Files\Level Elements\Enemy.cs" />
     <Compile Include="Game Files\Level Elements\EnemyExplosion.cs" />
-    <Compile Include="Game Files\Level Elements\LevelCompleted.cs" />
+    <Compile Include="Game Files\Level Elements\Level Completed screen\LevelCompleted.cs" />
+    <Compile Include="Game Files\Level Elements\Level Completed screen\StarAnim.cs" />
     <Compile Include="Game Files\Level Elements\PlacableWall.cs" />
     <Compile Include="Game Files\Level Elements\Platform.cs" />
     <Compile Include="Game Files\Level Elements\StaticWall.cs" />

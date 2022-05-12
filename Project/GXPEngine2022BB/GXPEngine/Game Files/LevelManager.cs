@@ -1,6 +1,7 @@
 ﻿using System;
 using GXPEngine;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace GXPEngine
 {
@@ -13,7 +14,7 @@ namespace GXPEngine
         Button reloadButton;
         Button nextLevelButton;
 
-        int currentLevel = 0;
+        public int currentLevel = 0;
 
         public int ammo = 3;
 
@@ -23,11 +24,15 @@ namespace GXPEngine
 
         public bool mainMenu = true;
 
+        public bool levelComplete = false;
+
+        int reloads = 0;
+
         public LevelManager() : base()
         {
             current = this;
 
-            LoadLevel(0);
+            LoadMainMenu();
         }
 
         void Update()
@@ -41,26 +46,53 @@ namespace GXPEngine
             if (reloadButton != null && reloadButton.CheckIfPressed() == true || Input.GetKeyDown(Key.BACKSPACE))
             {
                 LoadLevel(currentLevel);
+                reloads++;
             }
 
             if (nextLevelButton != null)
             {
-                if (EnemiesPresent() == false) ShowLevelEndScreen();
-
                 if (EnemiesPresent() == true)
                 {
-                    nextLevelButton.SetColor(255, 0, 0);
+                    //nextLevelButton.SetColor(255, 0, 0);
+                    nextLevelButton.color = 0x888888; //light gray
                 }
-                else if (nextLevelButton.CheckIfPressed() == true) LoadLevel(currentLevel + 1);
+                else if (nextLevelButton.CheckIfPressed() == true)
+                {
+                    if (currentLevel + 1 == 11)
+                    {
+                        LoadMainMenu();
+                    }
+                    else LoadLevel(currentLevel + 1);
+
+                    reloads = 0;
+
+                }
                 else nextLevelButton.SetColor(255, 255, 255);
 
-                //if (nextLevelButton.CheckIfPressed() == true) LoadLevel(currentLevel + 1);
+                if (reloadButton != null && reloadButton.CheckIfHovered() == true) reloadButton.SetCycle(1);
+                else if (reloadButton != null) reloadButton.SetCycle(0);
+
+                if (nextLevelButton != null && nextLevelButton.color != 0x888888 && nextLevelButton.CheckIfHovered() == true) nextLevelButton.SetCycle(1);
+                else if (reloadButton != null) nextLevelButton.SetCycle(0);
+
+                if (mainMenuButton != null && mainMenuButton.CheckIfHovered() == true) mainMenuButton.SetCycle(1);
+                else if (reloadButton != null) mainMenuButton.SetCycle(0);
+
+                if (myGame.gameStarted ==true && EnemiesPresent() == false) ShowLevelEndScreen();
+
+                if (reloads >= 3) nextLevelButton.color = 0xffffff;
             }
         }
 
+        int levelCompleteDelay = 30;
+
         void ShowLevelEndScreen()
         {
-            AddChild(new LevelCompleted());
+            levelCompleteDelay--;
+            if (levelCompleteDelay > 0) return;
+
+            if (levelComplete == false) AddChild(new LevelCompleted(ammo+1));
+            levelComplete = true;
         }
 
         bool EnemiesPresent()
@@ -71,7 +103,6 @@ namespace GXPEngine
 
         public void LoadControls()
         {
-
             RemoveAllLevels();
             SettingsMenu controls = new SettingsMenu();
             LateAddChild(controls);
@@ -94,7 +125,8 @@ namespace GXPEngine
 
             ammo = 3;
 
-            bool mainMenu = false;
+            levelComplete = false;
+            levelCompleteDelay = 30;
 
             switch (index)
             {
@@ -161,22 +193,23 @@ namespace GXPEngine
                     _levelUI.Add(levelUI10);
                     break;
                 default:
-                    LoadMainMenu();
-                    mainMenu = true;
+                    myGame.gameStarted = true;
+                    AddChild(new Level1());
+                    LevelUI levelUId = new LevelUI(0, 0);
+                    AddChild(levelUId);
+                    _levelUI.Add(levelUId);
+                    myGame.mainMusicPlaying = false;
                     break;
             }
 
-            if (mainMenu == false) //prevents the buttons on the top right appearing on the main menu when loading from this method.
-            {
-                reloadButton = new Button(myGame.width - 32, 32, "checkers.png");
-                AddChild(reloadButton);
+            reloadButton = new Button(myGame.width - 105, 50, "RedoSpriteSheet.png", true, 2, 1);
+            AddChild(reloadButton);
 
-                mainMenuButton = new Button(myGame.width - 94, 32, "square.png");
-                AddChild(mainMenuButton);
+            mainMenuButton = new Button(myGame.width - 210, 50, "XStyleSheet.png", true, 2, 1);
+            AddChild(mainMenuButton);
 
-                nextLevelButton = new Button(myGame.width - 160, 32, "colors.png");
-                AddChild(nextLevelButton);
-            }
+            nextLevelButton = new Button(myGame.width - 315.5f, 50, "NextLevelSpriteSheet.png", true, 2, 1);
+            AddChild(nextLevelButton);
         }
 
         void RemoveAllLevels()
