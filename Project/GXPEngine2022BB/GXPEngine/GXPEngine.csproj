@@ -44,6 +44,7 @@
     <Compile Include="Game Files\Level Elements\Crate.cs" />
     <Compile Include="Game Files\Level Elements\Enemy.cs" />
     <Compile Include="Game Files\Level Elements\EnemyExplosion.cs" />
+    <Compile Include="Game Files\Level Elements\LevelCompleted.cs" />
     <Compile Include="Game Files\Level Elements\PlacableWall.cs" />
     <Compile Include="Game Files\Level Elements\Platform.cs" />
     <Compile Include="Game Files\Level Elements\StaticWall.cs" />
@@ -56,6 +57,7 @@
     <Compile Include="Game Files\Levels\Level7.cs" />
     <Compile Include="Game Files\Levels\Level8.cs" />
     <Compile Include="Game Files\Levels\Level9.cs" />
+    <Compile Include="Game Files\Levels\SettingsMenu.cs" />
     <Compile Include="Game Files\Player\Aimline.cs" />
     <Compile Include="Game Files\Player\PlayerArm.cs" />
     <Compile Include="Game Files\Player\Bullet.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Game Files\Canvas\InventoryBar.cs" />
     <Compile Include="Game Files\Canvas\LevelUI.cs" />
     <Compile Include="Game Files\Sparks.cs" />
+    <Compile Include="Game Files\Story.cs" />
     <Compile Include="GXPEngine\AddOns\Gizmos.cs" />
     <Compile Include="GXPEngine\AddOns\SpriteBatch.cs" />
     <Compile Include="GXPEngine\AddOns\TiledLoader.cs" />

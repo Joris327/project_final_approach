@@ -23,7 +23,7 @@ namespace GXPEngine
             LateAddChild(new Enemy(600, 450));
             LateAddChild(new Platform(605, 525));
 
-            LateAddChild(new StaticWall(950, 300));
+            LateAddChild(new StaticWall(950, 300, new Vec2(1, 1)));
             //LateAddChild(new StaticWall(150, 600));
         }
     }

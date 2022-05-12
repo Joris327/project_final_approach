@@ -13,7 +13,6 @@ namespace GXPEngine
             SetOrigin(width / 2, height / 2);
             SetScaleXY(1.5f, 1.5f);
 
-
             bullet = pbullet;
         }
 

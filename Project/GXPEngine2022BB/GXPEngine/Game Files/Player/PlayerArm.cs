@@ -63,7 +63,7 @@ namespace GXPEngine
             Bullet bulletSprite = new Bullet(rotation, bulletObject);
             bulletObject.AddChild(bulletSprite);
 
-            gunshot.Play(false);
+            if (myGame.soundOn) gunshot.Play(false);
             levelManager.ammo--;
         }
     }

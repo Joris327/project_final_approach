@@ -20,12 +20,26 @@ namespace GXPEngine
 
         public bool holdingObject = false;
 
+        Sprite inventorySlot1;
+        Sprite inventorySlot2;
+        Sprite WallIconV;
+        Sprite WallIconH;
+
+        PlacableWall wallh;
+        PlacableWall wallv;
+
         public LevelUI(int pVWallsAmount, int pHWallsAmount) : base(1280, 720, false)
         {
             vWallsAmount = pVWallsAmount;
             hWallsAmount = pHWallsAmount;
 
             AddChild(new AmmoDisplay());
+
+            inventorySlot1 = new InventoryBar(myGame.width / 2 - 52.5f, myGame.height - 50);
+            inventorySlot2 = new InventoryBar(myGame.width / 2 + 52.5f, myGame.height - 50);
+
+            WallIconV = new StaticWall(myGame.width / 2 - 52.5f, myGame.height - 50, new Vec2(0.25f, 0.25f));
+            WallIconH = new StaticWall(myGame.width / 2 + 52.5f, myGame.height - 50, new Vec2(0.25f, 0.25f), 90);
         }
 
         void Update()
@@ -35,33 +49,33 @@ namespace GXPEngine
 
             graphics.Clear(Color.Empty);
 
-            if (Input.GetKey(Key.SPACE)) DrawMouseCoords();
+            if (Input.GetKey(Key.TAB)) DrawMouseCoords();
 
-            DrawInventory();
+            DrawInvantory();
             InventoryFunctionality();
         }
 
         void InventoryFunctionality()
         {
             if (mouseY < height &&
-                mouseY > height - 64 &&
+                mouseY > height - 100 &&
                 Input.GetMouseButtonDown(0) &&
                 holdingObject == false)
             {
-                if (mouseX < width / 2 - 80 &&
-                    mouseX > width / 2 - 150 &&
+                if (mouseX < width / 2 &&
+                    mouseX > width / 2 - 105 &&
                     vWallsAmount > 0)
                 {
-                    PlacableWall wallh = new PlacableWall(mouseX, mouseY, 0, this);
+                    wallh = new PlacableWall(mouseX, mouseY, 0, this);
                     levelManager.LateAddChild(wallh);
                     --vWallsAmount;
                     holdingObject = true;
                 }
-                else if (mouseX < width / 2 - 10 &&
-                         mouseX > width / 2 - 80 &&
+                else if (mouseX > width / 2 &&
+                         mouseX < width / 2 + 105 &&
                          hWallsAmount > 0)
                 {
-                    PlacableWall wallv = new PlacableWall(mouseX, mouseY, 90, this);
+                    wallv = new PlacableWall(mouseX, mouseY, 90, this);
                     levelManager.LateAddChild(wallv);
                     --hWallsAmount;
                     holdingObject = true;
@@ -69,12 +83,16 @@ namespace GXPEngine
             }
         }
 
-        void DrawInventory()
+        void DrawInvantory()
         {
-            DrawSprite(new InventoryBar(myGame.width / 2, myGame.height - 32));
+            DrawSprite(inventorySlot1);
+            DrawSprite(inventorySlot2);
 
-            graphics.DrawString(vWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Blue, width / 2 - 105, height - 32);
-            graphics.DrawString(hWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Blue, width / 2 - 35, height - 32);
+            DrawSprite(WallIconV);
+            DrawSprite(WallIconH);
+
+            graphics.DrawString(vWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Black, width / 2 - 20, height - 20);
+            graphics.DrawString(hWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Black, width / 2 + 85, height - 20);
         }
 
         void DrawMouseCoords()

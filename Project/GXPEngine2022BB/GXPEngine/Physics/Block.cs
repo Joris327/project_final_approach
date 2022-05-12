@@ -225,7 +225,7 @@ public class Block : EasyDraw
 				//Console.WriteLine("Left boundary collision");
 			}
 
-			ricochet.Play();
+			if (myGame.soundOn) ricochet.Play();
 		}
 		else if (_position.x + radius > myGame.RightXBoundary)
 		{
@@ -246,7 +246,7 @@ public class Block : EasyDraw
 				//Console.WriteLine("Right boundary collision");
 			}
 
-			ricochet.Play();
+			if (myGame.soundOn) ricochet.Play();
 		}
 
 		if (_position.y - radius < myGame.TopYBoundary)
@@ -268,7 +268,7 @@ public class Block : EasyDraw
 				//Console.WriteLine("Top boundary collision");
 			}
 
-			ricochet.Play();
+			if (myGame.soundOn) ricochet.Play();
 		}
 		else if (_position.y + radius > myGame.BottomYBoundary)
 		{
@@ -289,7 +289,7 @@ public class Block : EasyDraw
 				//Console.WriteLine("Bottom boundary collision");
 			}
 
-			ricochet.Play();
+			if (myGame.soundOn) ricochet.Play();
 		}
 	}
 
@@ -415,7 +415,7 @@ public class Block : EasyDraw
 						//Console.WriteLine("Block-block overlap detected.");
 					}
 
-					ricochet.Play();
+					if (myGame.soundOn) ricochet.Play();
 				}
 			}
 		}
@@ -521,6 +521,7 @@ public class Block : EasyDraw
 
 	public void DrawLine(Vec2 start, Vec2 end)
 	{
+		if (myGame.trailOn == false) return;
 		levelManager._lineContainer.graphics.DrawLine(Pens.White, start.x, start.y, end.x, end.y);
 	}
 

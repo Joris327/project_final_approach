@@ -19,8 +19,6 @@ namespace GXPEngine
         bool obstructed = false;
         bool obstructedlastFrame = false;
 
-        Sound placeWall = new Sound("place metal wall.mp3");
-
         public PlacableWall(float pX, float pY, int pRotation, LevelUI pGameUI) : base("WallTexture.png", false, true)
         {
             SetOrigin(width / 2, height / 2);
@@ -40,8 +38,13 @@ namespace GXPEngine
                 if (CheckIfObstructed() == false && Input.GetMouseButtonDown(0))
                 {
                     followMouse = false;
-                    placeWall.Play();
                     levelUI.holdingObject = false;
+
+                    if (myGame.soundOn == true)
+                    {
+                        Sound placeWall = new Sound("place metal wall.mp3");
+                        placeWall.Play();
+                    }
                 }
                 else if (Input.GetMouseButtonDown(1))
                 {

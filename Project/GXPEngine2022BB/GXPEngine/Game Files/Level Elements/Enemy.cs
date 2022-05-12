@@ -9,9 +9,11 @@ namespace GXPEngine
 {
     public class Enemy : AnimationSprite
     {
-        MyGame myGame = MyGame.current;
+        readonly MyGame myGame = MyGame.current;
 
         Sound explosion = new Sound("explsoion.mp3");
+
+        EnemyExplosion enemyExplosion;
 
         public Enemy(float pX, float pY) : base("spritesheet_robot.png", 4, 2)
         {
@@ -21,6 +23,7 @@ namespace GXPEngine
             SetFrame(0);
             SetCycle(0, 4);
             this.collider.isTrigger = true;
+            enemyExplosion = new EnemyExplosion(x, y);
         }
 
         void Update()
@@ -32,9 +35,12 @@ namespace GXPEngine
         {
             if (other is Bullet)
             {
-                //Console.WriteLine("Hit");
-                explosion.Play(false, 0, 0.75f);
-                myGame.LateAddChild(new EnemyExplosion(x, y));
+                if (myGame.soundOn == true)
+                {
+                    explosion.Play(false, 0, 0.75f);
+                }
+
+                myGame.LateAddChild(enemyExplosion);
                 this.LateDestroy();
             }
         }

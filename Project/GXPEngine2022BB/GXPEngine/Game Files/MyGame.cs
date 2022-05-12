@@ -14,6 +14,19 @@ public class MyGame : Game
 	public float TopYBoundary;
 	public float BottomYBoundary;
 
+	public bool soundOn = true;
+	public bool musicOn = true;
+	public bool trailOn = true;
+
+	public bool gameStarted = false;
+	public bool mainMusicPlaying = false;
+	public bool bMusicPlaying = false;
+
+	public SoundChannel channel;
+	public SoundChannel channelLevel;
+
+	
+
 	static void Main()
 	{
 		new MyGame().Start();
@@ -34,7 +47,51 @@ public class MyGame : Game
 
 	void Update()
     {
+		ManageMusic();
+
 		StepThroughMovers();
+	}
+
+	void ManageMusic()
+    {
+		Sound menuMusic = new Sound("mainmenu_music.mp3", true);
+		Sound levelMusic = new Sound("b_music.mp3", true);
+
+		if (musicOn)
+		{
+			if (!mainMusicPlaying && !gameStarted)
+			{
+				channel = menuMusic.Play();
+				mainMusicPlaying = true;
+			}
+
+			if (gameStarted)
+			{
+				channel.Stop();
+				mainMusicPlaying = false;
+
+				if (!bMusicPlaying)
+				{
+					channelLevel = levelMusic.Play();
+					bMusicPlaying = true;
+				}
+			}
+
+			if (!gameStarted && channelLevel != null)
+			{
+				channelLevel.Stop();
+				bMusicPlaying = false;
+			}
+		}
+
+		if (!musicOn)
+		{
+			channel.Mute = true;
+		}
+		else
+		{
+			channel.Mute = false;
+		}
 	}
 
 	void StepThroughMovers()

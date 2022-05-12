@@ -9,7 +9,7 @@ namespace GXPEngine
 {
     public class InventoryBar : Sprite
     {
-        public InventoryBar(float pX, float pY) : base("inventory_placeholder.png", false, false)
+        public InventoryBar(float pX, float pY) : base("Empty_UUI.png", false, false)
         {
             SetOrigin(width / 2, height / 2);
             SetXY(pX, pY);

@@ -21,6 +21,8 @@ namespace GXPEngine
 
         public Canvas _lineContainer = null;
 
+        public bool mainMenu = true;
+
         public LevelManager() : base()
         {
             current = this;
@@ -32,6 +34,7 @@ namespace GXPEngine
         {
             if (mainMenuButton != null && mainMenuButton.CheckIfPressed() == true)
             {
+                myGame.gameStarted = false;
                 LoadMainMenu();
             }
 
@@ -42,7 +45,9 @@ namespace GXPEngine
 
             if (nextLevelButton != null)
             {
-                if (FindObjectOfType(typeof(Enemy)) != null)
+                if (EnemiesPresent() == false) ShowLevelEndScreen();
+
+                if (EnemiesPresent() == true)
                 {
                     nextLevelButton.SetColor(255, 0, 0);
                 }
@@ -51,6 +56,25 @@ namespace GXPEngine
 
                 //if (nextLevelButton.CheckIfPressed() == true) LoadLevel(currentLevel + 1);
             }
+        }
+
+        void ShowLevelEndScreen()
+        {
+            AddChild(new LevelCompleted());
+        }
+
+        bool EnemiesPresent()
+        {
+            if (FindObjectOfType(typeof(Enemy)) != null) return true;
+            else return false;
+        }
+
+        public void LoadControls()
+        {
+
+            RemoveAllLevels();
+            SettingsMenu controls = new SettingsMenu();
+            LateAddChild(controls);
         }
 
         public void LoadMainMenu()
@@ -75,10 +99,12 @@ namespace GXPEngine
             switch (index)
             {
                 case 1:
+                    myGame.gameStarted = true;
                     AddChild(new Level1());
                     LevelUI levelUI1 = new LevelUI(0, 0);
                     AddChild(levelUI1);
                     _levelUI.Add(levelUI1);
+                    myGame.mainMusicPlaying = false;
                     break;
                 case 2:
                     AddChild(new Level2());
@@ -140,8 +166,6 @@ namespace GXPEngine
                     break;
             }
 
-            
-
             if (mainMenu == false) //prevents the buttons on the top right appearing on the main menu when loading from this method.
             {
                 reloadButton = new Button(myGame.width - 32, 32, "checkers.png");
@@ -168,6 +192,13 @@ namespace GXPEngine
             }
 
             myGame._movers.Clear();
+        }
+
+        public void LoadStory()
+        {
+            RemoveAllLevels();
+            Story story = new Story();
+            LateAddChild(story);
         }
     }
 }
