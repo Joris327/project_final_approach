@@ -15,6 +15,8 @@ public class MyGame : Game
 	public float BottomYBoundary;
 	public Boolean soundOn = true;
 	public Boolean musicOn = true;
+	public Boolean trailOn = true;
+
 	public Boolean mainMusicPlaying = false;
 	public Boolean bMusicPlaying = false;
 	

@@ -56,6 +56,8 @@ namespace GXPEngine
 
             //levelManager.LateAddChild(new Bullet(nozzle_Pos.x, nozzle_Pos.y, rotation + parent.rotation, velocity));
             Block bulletObject = new Block(5, nozzle_Pos, velocity, true, false);
+
+            
         
             myGame._movers.Add(bulletObject);
             levelManager.AddChild(bulletObject);

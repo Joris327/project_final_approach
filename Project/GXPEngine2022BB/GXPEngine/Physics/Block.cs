@@ -499,7 +499,10 @@ public class Block : EasyDraw
 
 	public void DrawLine(Vec2 start, Vec2 end)
 	{
-		_lineContainer.graphics.DrawLine(Pens.White, start.x, start.y, end.x, end.y);
+		if(myGame.trailOn)
+        {
+			_lineContainer.graphics.DrawLine(Pens.White, start.x, start.y, end.x, end.y);
+		}
 	}
 
 	void ShowDebugInfo()
