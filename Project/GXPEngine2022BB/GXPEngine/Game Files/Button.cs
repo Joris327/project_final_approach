@@ -7,11 +7,12 @@ namespace GXPEngine
     {
         public String bSprite;
 
-        public Button(float pX, float pY, String buttonSprite, bool pVisible=true) : base(buttonSprite, 1, 1, -1, false, false)
+        public Button(float pX, float pY, String buttonSprite, bool pVisible=true, int pRotation = 0) : base(buttonSprite, 1, 1, -1, false, false)
         {
             SetOrigin(width / 2, height / 2);
             SetXY(pX, pY);
             visible = pVisible;
+            rotation = pRotation;
         }
 
         public bool CheckIfPressed()

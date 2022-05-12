@@ -12,6 +12,7 @@ namespace GXPEngine
         Button mainMenuButton;
         Button reloadButton;
         Button nextLevelButton;
+        Sound end;
 
         int currentLevel = 0;
 
@@ -45,13 +46,25 @@ namespace GXPEngine
 
             if (nextLevelButton != null)
             {
-                if (EnemiesPresent() == false) ShowLevelEndScreen();
+                if (EnemiesPresent() == false)
+                {
+
+                    ShowLevelEndScreen();
+                    
+                }
 
                 if (EnemiesPresent() == true)
                 {
                     nextLevelButton.SetColor(255, 0, 0);
                 }
-                else if (nextLevelButton.CheckIfPressed() == true) LoadLevel(currentLevel + 1);
+                else if (nextLevelButton.CheckIfPressed() == true)
+                {
+                    myGame.endPlaying = false;
+                    myGame.bMusicPlaying = false;
+                    LoadLevel(currentLevel + 1); 
+
+                    
+                }
                 else nextLevelButton.SetColor(255, 255, 255);
 
                 //if (nextLevelButton.CheckIfPressed() == true) LoadLevel(currentLevel + 1);
@@ -60,6 +73,7 @@ namespace GXPEngine
 
         void ShowLevelEndScreen()
         {
+            
             AddChild(new LevelCompleted());
         }
 

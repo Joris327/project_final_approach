@@ -14,7 +14,7 @@ namespace GXPEngine
         float buttonScale = 0.55f;
 
 
-        public SettingsMenu() : base("BQK.png", false, false)
+        public SettingsMenu() : base("menu_bg.png", false, false)
         {
             Console.WriteLine("Sound on = " + myGame.soundOn);
             Console.WriteLine("Music on = " + myGame.musicOn);

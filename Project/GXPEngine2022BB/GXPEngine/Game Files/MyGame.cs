@@ -21,6 +21,9 @@ public class MyGame : Game
 	public bool gameStarted = false;
 	public bool mainMusicPlaying = false;
 	public bool bMusicPlaying = false;
+	public bool endPlaying = false;
+
+	public bool levelEnd = false;
 
 	public SoundChannel channel;
 	public SoundChannel channelLevel;
@@ -56,6 +59,7 @@ public class MyGame : Game
     {
 		Sound menuMusic = new Sound("mainmenu_music.mp3", true);
 		Sound levelMusic = new Sound("b_music.mp3", true);
+		Sound endMusic = new Sound("end.mp3", false);
 
 		if (musicOn)
 		{
@@ -92,6 +96,11 @@ public class MyGame : Game
 		{
 			channel.Mute = false;
 		}
+
+		if(endPlaying)
+        {
+			channelLevel.Stop();
+        }
 	}
 
 	void StepThroughMovers()

@@ -11,12 +11,30 @@ public class MainMenu : Sprite
     Button storyButton;
     Button exitButton;
 
-    public MainMenu() : base("checkers.png")
+    public MainMenu() : base("main_menu.png")
     {
-        startButton = new Button(myGame.width / 2, myGame.height / 2, "square.png");
-        controlsButton = new Button(myGame.width / 2, myGame.height / 2 + 64, "square.png");
-        storyButton = new Button(myGame.width / 2, myGame.height / 2 + 128, "square.png");
-        exitButton = new Button(myGame.width / 2, myGame.height / 2 + 192, "square.png");
+        startButton = new Button(myGame.width / 2  + 30, myGame.height / 2 - 20, "square.png");
+        controlsButton = new Button(myGame.width / 2 - 60, myGame.height / 2 + 125, "square.png");
+        storyButton = new Button(myGame.width / 2 + 500, myGame.height / 2 + 30, "square.png");
+        exitButton = new Button(myGame.width / 2 - 60, myGame.height / 2 + 290, "square.png");
+
+        startButton.height = 135;
+        startButton.width = 380;
+        startButton.alpha = 0;
+
+        controlsButton.width = 400;
+        controlsButton.height = 100;
+        controlsButton.alpha = 20;
+        controlsButton.alpha = 0;
+
+        exitButton.width = 350;
+        exitButton.height = 190;
+        exitButton.alpha = 0;
+
+
+        storyButton.width = 175;
+        storyButton.height = 110;
+        storyButton.alpha = 0;
 
         LateAddChild(controlsButton);
         LateAddChild(exitButton);
