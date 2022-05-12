@@ -17,8 +17,6 @@ namespace GXPEngine
 
         readonly int starsWon;
 
-        
-
         readonly Font cowboyFont = new Font(FontFamily.GenericSerif, 20, FontStyle.Regular);
 
         readonly Canvas scoreUI = new Canvas(300, 300, false);
@@ -52,7 +50,7 @@ namespace GXPEngine
                 star3.visible = false;
             }
 
-            if (myGame.musicOn) levelManager.winchannel = levelManager.winmusic.Play();
+            if (myGame.musicOn && levelManager.winchannel != null) levelManager.winchannel = levelManager.winmusic.Play();
             if (myGame.channelLevel != null) myGame.channelLevel.IsPaused = true;
 
             AddChild(scoreUI);
@@ -99,7 +97,7 @@ namespace GXPEngine
 
             if (mainMenuButton.CheckIfPressed() == true)
             {
-                levelManager.winchannel.Stop();
+                if (levelManager.winchannel != null) levelManager.winchannel.Stop();
                 levelManager.LoadMainMenu();
             }
             else if (redoButton.CheckIfPressed() == true)
@@ -111,7 +109,7 @@ namespace GXPEngine
                     levelManager.score -= levelManager.vwallsamount * 50;
                 }
 
-                levelManager.winchannel.Stop();
+                if (levelManager.winchannel != null) levelManager.winchannel.Stop();
                 levelManager.LoadLevel(levelManager.currentLevel);
                 myGame.channelLevel.IsPaused = false;
             }
@@ -120,13 +118,14 @@ namespace GXPEngine
             {
                 if (levelManager.currentLevel < 10)
                 {
-                    levelManager.winchannel.Stop();
+                    if (levelManager.winchannel != null) levelManager.winchannel.Stop();
                     levelManager.LoadLevel(levelManager.currentLevel + 1);
                     myGame.channelLevel.IsPaused = false;
+                    levelManager.reloads = 0;
                 }
                 else
                 {
-                    levelManager.winchannel.Stop();
+                    if (levelManager.winchannel != null) levelManager.winchannel.Stop();
                     levelManager.LoadMainMenu();
                     myGame.channelLevel.IsPaused = false;
                 }

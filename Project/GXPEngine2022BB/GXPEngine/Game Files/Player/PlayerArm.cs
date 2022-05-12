@@ -36,7 +36,7 @@ namespace GXPEngine
                 }
             }
 
-            if (Input.GetMouseButtonDown(1) && levelManager.ammo > 0 && levelManager.levelComplete == false && levelManager.holding == false)
+            if (Input.GetMouseButtonDown(2) && levelManager.ammo > 0 && levelManager.levelComplete == false && levelManager.holding == false)
             {
                 if (levelUI == null) Shoot();
                 else if (levelUI != null)

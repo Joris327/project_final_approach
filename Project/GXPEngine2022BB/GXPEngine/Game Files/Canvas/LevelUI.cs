@@ -55,7 +55,8 @@ namespace GXPEngine
 
             if (Input.GetKey(Key.TAB)) DrawMouseCoords();
 
-            if (levelManager.levelComplete == false) graphics.DrawString("Score: " + levelManager.score.ToString(), cowboyFont, Brushes.Black, 30, 110);
+            graphics.DrawString("Level: " + levelManager.currentLevel.ToString(), cowboyFont, Brushes.Black, 210, 15);
+            if (levelManager.levelComplete == false) graphics.DrawString("Score: " + levelManager.score.ToString(), cowboyFont, Brushes.Black, 210, 55);
 
             DrawInventory();
             InventoryFunctionality();

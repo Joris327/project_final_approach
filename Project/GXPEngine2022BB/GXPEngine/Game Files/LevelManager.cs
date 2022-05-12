@@ -26,7 +26,7 @@ namespace GXPEngine
 
         public bool levelComplete = false;
 
-        int reloads = 0;
+        public int reloads = 0;
         readonly int reloadsMax = 5;
 
         public int score = 0;
@@ -53,7 +53,7 @@ namespace GXPEngine
             {
                 if (mainMenuButton.CheckIfPressed() == true)
                 {
-                    winchannel.Stop();
+                    if (winchannel != null) winchannel.Stop();
                     reloads = 0;
                     LoadMainMenu();
                 }
@@ -73,7 +73,7 @@ namespace GXPEngine
                         score -= vwallsamount * 50;
                     }
 
-                    winchannel.Stop();
+                    if (winchannel != null) winchannel.Stop();
                     LoadLevel(currentLevel);
                     reloads++;
                     myGame.channelLevel.IsPaused = false;
@@ -100,12 +100,12 @@ namespace GXPEngine
                     {
                         if (currentLevel + 1 == 11)
                         {
-                            winchannel.Stop();
+                            if (winchannel != null) winchannel.Stop();
                             LoadMainMenu();
                         }
                         else
                         {
-                            winchannel.Stop();
+                            if (winchannel != null) winchannel.Stop();
                             LoadLevel(currentLevel + 1);
                             myGame.channelLevel.IsPaused = false;
                             nextLevelButton.SetCycle(0);
@@ -260,14 +260,17 @@ namespace GXPEngine
                     break;
             }
 
-            reloadButton = new Button(myGame.width - 300, 50, "RedoSpriteSheet.png", true, 2, 1);
+            reloadButton = new Button(myGame.width - 210, 50, "RedoSpriteSheet.png", true, 2, 1);
             AddChild(reloadButton);
+            reloadButton.SetScaleXY(0.75f, 0.75f);
 
-            mainMenuButton = new Button(myGame.width - 500, 50, "XStyleSheet.png", true, 2, 1);
+            mainMenuButton = new Button(myGame.width - 335, 50, "XStyleSheet.png", true, 2, 1);
             AddChild(mainMenuButton);
+            mainMenuButton.SetScaleXY(0.75f, 0.75f);
 
-            nextLevelButton = new Button(myGame.width - 100, 50, "NextLevelSpriteSheet.png", true, 2, 1);
+            nextLevelButton = new Button(myGame.width - 85, 50, "NextLevelSpriteSheet.png", true, 2, 1);
             AddChild(nextLevelButton);
+            nextLevelButton.SetScaleXY(0.75f, 0.75f);
         }
 
         void RemoveAllLevels()
