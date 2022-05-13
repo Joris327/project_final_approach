@@ -109,8 +109,8 @@ namespace GXPEngine
             DrawSprite(WallIconV);
             DrawSprite(WallIconH);
 
-            graphics.DrawString(vWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Black, width / 2 - 20, height - 20);
-            graphics.DrawString(hWallsAmount.ToString(), SystemFonts.DefaultFont, Brushes.Black, width / 2 + 85, height - 20);
+            graphics.DrawString(vWallsAmount.ToString(), cowboyFont, Brushes.Black, width / 2 - 27, height - 32);
+            graphics.DrawString(hWallsAmount.ToString(), cowboyFont, Brushes.Black, width / 2 + 78, height - 32);
 
             levelManager.hwallsamount = hWallsAmount;
             levelManager.vwallsamount = vWallsAmount;

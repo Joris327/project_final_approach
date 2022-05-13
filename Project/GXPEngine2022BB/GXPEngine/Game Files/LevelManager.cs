@@ -76,7 +76,7 @@ namespace GXPEngine
                     if (winchannel != null) winchannel.Stop();
                     LoadLevel(currentLevel);
                     reloads++;
-                    myGame.channelLevel.IsPaused = false;
+                    if (myGame.channelLevel != null) myGame.channelLevel.IsPaused = false;
                 }
 
                 if (reloadButton.CheckIfHovered() == true) reloadButton.SetCycle(1);
@@ -107,7 +107,7 @@ namespace GXPEngine
                         {
                             if (winchannel != null) winchannel.Stop();
                             LoadLevel(currentLevel + 1);
-                            myGame.channelLevel.IsPaused = false;
+                            if (myGame.channelLevel != null) myGame.channelLevel.IsPaused = false;
                             nextLevelButton.SetCycle(0);
                         }
 

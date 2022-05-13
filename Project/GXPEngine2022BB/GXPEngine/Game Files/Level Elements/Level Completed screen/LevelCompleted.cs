@@ -111,7 +111,7 @@ namespace GXPEngine
 
                 if (levelManager.winchannel != null) levelManager.winchannel.Stop();
                 levelManager.LoadLevel(levelManager.currentLevel);
-                myGame.channelLevel.IsPaused = false;
+                if (myGame.channelLevel != null) myGame.channelLevel.IsPaused = false;
             }
 
             if (nextLevelButton.CheckIfPressed() == true)
@@ -120,14 +120,14 @@ namespace GXPEngine
                 {
                     if (levelManager.winchannel != null) levelManager.winchannel.Stop();
                     levelManager.LoadLevel(levelManager.currentLevel + 1);
-                    myGame.channelLevel.IsPaused = false;
+                    if (myGame.channelLevel != null) myGame.channelLevel.IsPaused = false;
                     levelManager.reloads = 0;
                 }
                 else
                 {
                     if (levelManager.winchannel != null) levelManager.winchannel.Stop();
                     levelManager.LoadMainMenu();
-                    myGame.channelLevel.IsPaused = false;
+                    if (myGame.channelLevel != null) myGame.channelLevel.IsPaused = false;
                 }
             }
         }
