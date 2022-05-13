@@ -50,7 +50,7 @@ namespace GXPEngine
                 star3.visible = false;
             }
 
-            if (myGame.musicOn && levelManager.winchannel != null) levelManager.winchannel = levelManager.winmusic.Play();
+            if (myGame.musicOn) levelManager.winchannel = levelManager.winmusic.Play();
             if (myGame.channelLevel != null) myGame.channelLevel.IsPaused = true;
 
             AddChild(scoreUI);

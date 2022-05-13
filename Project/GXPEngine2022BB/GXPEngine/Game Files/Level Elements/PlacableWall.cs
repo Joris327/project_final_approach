@@ -92,7 +92,11 @@ namespace GXPEngine
             {
                 SetColor(255, 255, 0);
                 if (Input.GetMouseButtonDown(1)) ReturnToInventory();
-                else if (Input.GetMouseButtonDown(0)) followMouse = true;
+                else if (Input.GetMouseButtonDown(0) && levelUI.holdingObject == false)
+                {
+                    followMouse = true;
+                    levelUI.holdingObject = true;
+                }
             }
             else
             {
