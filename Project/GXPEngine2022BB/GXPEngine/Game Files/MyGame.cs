@@ -32,10 +32,11 @@ public class MyGame : Game
 		new MyGame().Start();
 	}
 
-	public MyGame() : base(1280, 720, false, false)
+	public MyGame() : base(1280, 720, true, false)
 	{
 		targetFps = 60;
 		current = this;
+		ShowMouse(true);
 
 		LeftXBoundary = 64;
 		RightXBoundary = width - 64;
